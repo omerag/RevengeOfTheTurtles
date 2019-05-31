@@ -8,7 +8,9 @@ public class Bullet extends GameObject{
     private Handler handler;
     //int mx, my;
     BulletType bulletType;
-    private BufferedImage bullet_image,bullet_image2,bullet_image3, tempImage;
+    private BufferedImage bullet_image;
+    private BufferedImage bullet_image2;
+    private BufferedImage bullet_image3;
     private int state = 1;
 
 
@@ -29,11 +31,7 @@ public class Bullet extends GameObject{
         bullet_image = ss.grabImage(1,3,16,16);
         bullet_image2 = ss.grabImage(2,3,16,16);
         bullet_image3 = ss.grabImage(3,3,16,16);
-
-
     }
-
-
 
 
 
@@ -43,15 +41,15 @@ public class Bullet extends GameObject{
         y +=velY;
 
         for(int i = 0; i < handler.object.size();i++) {
-            GameObject tempobject = handler.object.get(i);
+            GameObject tempObject = handler.object.get(i);
 
-            if (tempobject.getId() == ID.Block){
-                if (getBounds().intersects(tempobject.getBounds())) {
+            if (tempObject.getId() == ID.Block){
+                if (getBounds().intersects(tempObject.getBounds())) {
                     handler.removeObject(this);
                 }
             }
         }
-        tempImage = bullet_image;
+        BufferedImage tempImage = bullet_image;
         bullet_image = bullet_image2;
         bullet_image2 = bullet_image3;
         bullet_image3 = tempImage;
@@ -62,15 +60,6 @@ public class Bullet extends GameObject{
 
         g.drawImage(bullet_image,x,y,null);
 
-        /*
-        if(bulletType == BulletType.ENEMY) {
-            g.setColor(Color.RED);
-            g.fillOval(x, y, 8, 8);
-        }
-        else {
-            g.setColor(Color.GREEN);
-            g.fillOval(x, y, 8, 8);
-        }*/
     }
 
     @Override

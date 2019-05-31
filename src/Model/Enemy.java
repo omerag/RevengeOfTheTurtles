@@ -89,6 +89,7 @@ public class Enemy extends GameObject {
 
     @Override
     public void render(Graphics g) {
+
         g.drawImage(enemy_image,x,y,null);
 
     }

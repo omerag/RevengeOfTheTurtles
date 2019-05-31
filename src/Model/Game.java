@@ -3,12 +3,9 @@ package Model;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import View.Window;
-import Model.Camera;
+
 import Controller.MouseInput;
 import Controller.*;
-
-import javax.swing.*;
 
 
 public class Game extends Canvas implements Runnable {
@@ -17,7 +14,6 @@ public class Game extends Canvas implements Runnable {
     private boolean isRunning = false;
     private Thread thread;
     private Handler handler;
-    private Camera camera;
     private SpriteSheet ss;
 
     private BufferedImage level = null;
@@ -30,14 +26,7 @@ public class Game extends Canvas implements Runnable {
 
     public Game(){
 
-
-
-     //   new Window(1024+12,768,"Revenge of the Turtles!");
-
-
-
         handler = new Handler();
-        camera = new Camera(0,0);
 
         this.addKeyListener(new KeyInput(handler));
 
@@ -48,7 +37,7 @@ public class Game extends Canvas implements Runnable {
         ss = new SpriteSheet(sprite_sheet);
         floor = ss.grabImage(4,2,32,32);
 
-        this.addMouseListener(new MouseInput(handler,camera,this, ss));
+        this.addMouseListener(new MouseInput(handler,this, ss));
 
         loadLevel(level);
 
@@ -178,7 +167,7 @@ public class Game extends Canvas implements Runnable {
                     handler.addObject(new Enemy(xx*32,yy*32,ID.Enemy, handler, ss,this));
                 }
                 if(blue == 255 && green == 0){
-                    handler.addObject(new Wizard(xx*32,yy*32,ID.Player, handler,this,ss));
+                    handler.addObject(new Player(xx*32,yy*32,ID.Player, handler,this,ss));
                 }
                 if(blue == 255 && green == 255){
                     handler.addObject(new EnemySpawmer(xx*32,yy*32,ID.Enemy, handler, ss,this));

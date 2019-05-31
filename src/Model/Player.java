@@ -3,13 +3,13 @@ package Model;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Wizard extends GameObject {
+public class Player extends GameObject {
 
     Handler handler;
     Game game;
     private BufferedImage wizard_image;
 
-    public Wizard(int x, int y, ID id, Handler handler,Game game, SpriteSheet ss) {
+    public Player(int x, int y, ID id, Handler handler, Game game, SpriteSheet ss) {
         super(x, y, id, ss);
         this.handler = handler;
         this.game = game;

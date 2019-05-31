@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Handler;
-import Model.Camera;
 import Model.Game;
 import Model.SpriteSheet;
 import Model.Bullet;
@@ -14,7 +13,6 @@ import Model.BulletType;
 public class MouseInput extends MouseAdapter {
 
     private Handler handler;
-    private Camera camera;
     private Game game;
     protected SpriteSheet ss;
 
@@ -22,17 +20,15 @@ public class MouseInput extends MouseAdapter {
 
 
 
-    public MouseInput(Handler handler,Camera camera, Game game, SpriteSheet ss) {
+    public MouseInput(Handler handler ,Game game, SpriteSheet ss) {
         this.handler = handler;
-        this.camera = camera;
         this.game = game;
         this.ss = ss;
 
     }
 
     public void mousePressed(MouseEvent e){
-       // int mx = (int)(e.getX()+camera.getX());
-      //  int my = (int)(e.getY()+camera.getY());
+
         int mx = e.getX();
         int my = e.getY();
 
@@ -46,7 +42,6 @@ public class MouseInput extends MouseAdapter {
                     && handler.getTempBulletType() == BulletType.ENEMY){
                     handler.addObject(new Bullet(tempObject.getX() + 16, tempObject.getY() + 24, ID.Bullet, handler, mx, my, ss, BulletType.PALYER));
                     handler.removeObject(handler.getTempBullet());
-                    //game.ammo--;
                     handler.setTempBulletToNull();
                 }
             }

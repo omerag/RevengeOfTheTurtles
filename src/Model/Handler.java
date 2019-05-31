@@ -3,8 +3,6 @@ package Model;
 import java.awt.*;
 import java.util.ArrayList;
 
-import java.util.LinkedList;
-
 public class Handler {
    // LinkedList<GameObject> object = new LinkedList<>();
     ArrayList<GameObject> object = new ArrayList<>();
@@ -13,7 +11,7 @@ public class Handler {
     private boolean up = false, down = false, right = false,left = false;
 
     public Bullet tempBullet = null;
-    public Wizard tempWizard = null;
+    public Player tempPlayer = null;
 
 
     public void tick(){
@@ -21,11 +19,11 @@ public class Handler {
             GameObject tempObject = object.get(i);
 
             if(tempObject.getId()== ID.Player){
-                tempWizard = (Wizard)tempObject;
+                tempPlayer = (Player)tempObject;
             }
 
-            if(tempObject.getId() == ID.Bullet && tempWizard != null){
-                if(isShootable(tempObject.getX(),tempObject.getY(),tempWizard.getX(),tempWizard.getY())){
+            if(tempObject.getId() == ID.Bullet && tempPlayer != null){
+                if(isShootable(tempObject.getX(),tempObject.getY(), tempPlayer.getX(), tempPlayer.getY())){
 
                     tempBullet = (Bullet)tempObject;
                 }
