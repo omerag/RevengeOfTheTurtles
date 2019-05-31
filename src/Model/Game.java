@@ -32,7 +32,8 @@ public class Game extends Canvas implements Runnable {
 
 
 
-       // new Window(1024+12,768,"Revenge of the Turtles!",this);
+     //   new Window(1024+12,768,"Revenge of the Turtles!");
+
 
 
         handler = new Handler();
@@ -54,16 +55,17 @@ public class Game extends Canvas implements Runnable {
         //start();
     }
 
+
     private void start(){
         isRunning = true;
         thread = new Thread(this);
         thread.start();
-
     }
 
     public void StartGame()
     {
         start();
+        System.out.println("Game Started");
     }
 
 
@@ -74,10 +76,14 @@ public class Game extends Canvas implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println("Game Ended");
+
     }
 
     @Override
     public void run() {
+
+        System.out.println("Game is Running");
         this.requestFocus();
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;

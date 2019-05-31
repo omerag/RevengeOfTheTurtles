@@ -13,18 +13,18 @@ import java.net.URL;
 import Model.Game;
 
 public class Window extends JFrame implements ActionListener,KeyListener {
-    private Game game;
     public static final String ACTION_NEW_GAME = "newGame";
     public static final String ACTION_EXIT_GAME = "exitGame";
     public static final String ACTION_ABOUT = "helpAbout";
 
-    public Window(int width, int height, String title,Game _game)
+    Game _game = null;
+
+    public Window(int width, int height, String title)
     {
-        initUI(width,height,title,game);
-        this.game = _game;
+        initUI(width,height,title);
     }
 
-    private void initUI(int width, int height, String title,Game _game) {
+    private void initUI(int width, int height, String title) {
 
 
 
@@ -80,8 +80,8 @@ public class Window extends JFrame implements ActionListener,KeyListener {
         about.setToolTipText("About the developers");
         about.setActionCommand(ACTION_ABOUT);
 
-         fileMenu.addActionListener(this);
-         helpMenu.addActionListener(this);
+        fileMenu.addActionListener(this);
+        helpMenu.addActionListener(this);
         newGame.addActionListener(this);
         exitGame.addActionListener(this);
         about.addActionListener(this);
@@ -97,10 +97,10 @@ public class Window extends JFrame implements ActionListener,KeyListener {
 
 
     private void newGame() {
-        add(this.game,BorderLayout.CENTER);
-      this.game.StartGame();
-
+        _game = new Game();
+        add(_game,BorderLayout.CENTER);
     }
+
 
     public void actionPerformed(ActionEvent e)
     {
@@ -109,8 +109,8 @@ public class Window extends JFrame implements ActionListener,KeyListener {
         if (action.equals(ACTION_NEW_GAME)) {
             System.out.println("New Game");
             newGame();
-            //this.game.StartGame();
-
+            _game.StartGame();
+            setVisible(true);
         } else if (action.equals(ACTION_EXIT_GAME)) {
             System.out.println("Exit the game");
             System.exit(0);
