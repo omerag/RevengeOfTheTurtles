@@ -13,11 +13,11 @@ import java.net.URL;
 import Model.Game;
 
 public class Window extends JFrame implements ActionListener {
-    public static final String ACTION_NEW_GAME = "newGame";
-    public static final String ACTION_EXIT_GAME = "exitGame";
-    public static final String ACTION_ABOUT = "helpAbout";
+    private static final String ACTION_NEW_GAME = "newGame";
+    private static final String ACTION_EXIT_GAME = "exitGame";
+    private static final String ACTION_ABOUT = "helpAbout";
 
-    Game _game = null;
+    private Game _game = null;
 
     public Window(int width, int height, String title)
     {
@@ -35,7 +35,6 @@ public class Window extends JFrame implements ActionListener {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setVisible(true);
 
         setLayout(new BorderLayout());
         setLocationRelativeTo(getRootPane());
@@ -45,6 +44,7 @@ public class Window extends JFrame implements ActionListener {
         JMenuBar menuBar = new JMenuBar();
         add(menuBar, BorderLayout.NORTH);
 
+
         //add(mainPanel,gamepanel);
         // Setup the menu and its action listeners
         initMenu(menuBar);
@@ -52,6 +52,9 @@ public class Window extends JFrame implements ActionListener {
         // Setup keyboard input listener
 
         //newGame(1);
+
+        setVisible(true);
+
     }
 
     private void initMenu(JMenuBar menuBar) {
