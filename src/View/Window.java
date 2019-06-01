@@ -12,7 +12,7 @@ import java.awt.event.KeyListener;
 import java.net.URL;
 import Model.Game;
 
-public class Window extends JFrame implements ActionListener,KeyListener {
+public class Window extends JFrame implements ActionListener {
     public static final String ACTION_NEW_GAME = "newGame";
     public static final String ACTION_EXIT_GAME = "exitGame";
     public static final String ACTION_ABOUT = "helpAbout";
@@ -25,8 +25,6 @@ public class Window extends JFrame implements ActionListener,KeyListener {
     }
 
     private void initUI(int width, int height, String title) {
-
-
 
         setTitle(title);
         setPreferredSize(new Dimension(width,height));
@@ -52,7 +50,6 @@ public class Window extends JFrame implements ActionListener,KeyListener {
         initMenu(menuBar);
         //mainPanel.add(gamepanel, BorderLayout.CENTER);
         // Setup keyboard input listener
-        addKeyListener(this);
 
         //newGame(1);
     }
@@ -117,74 +114,6 @@ public class Window extends JFrame implements ActionListener,KeyListener {
         } else if (action.equals(ACTION_ABOUT)) {
             System.out.println("Show about dialog");
         }
-    }
-
-
-
-    /*
-    public Window(int width, int height, String title, Game game){
-
-        JFrame frame = new JFrame(title);
-
-        frame.setPreferredSize(new Dimension(width,height));
-        frame.setMaximumSize(new Dimension(width,height));
-        frame.setMinimumSize(new Dimension(width,height));
-
-        frame.add(game);
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-    }
-*/
-
-    /*
-     * Used for responding to keyboard inputs
-     */
-    @Override
-    public void keyPressed(KeyEvent e) {
-        /*
-        int keyCode = e.getKeyCode();
-
-        switch (keyCode) {
-            case KeyEvent.VK_UP:
-            case KeyEvent.VK_KP_UP:
-                mouse.move(DIRECTION.NORTH, null);
-                break;
-
-            case KeyEvent.VK_DOWN:
-            case KeyEvent.VK_KP_DOWN:
-                mouse.move(DIRECTION.SOUTH, null);
-                break;
-
-            case KeyEvent.VK_LEFT:
-            case KeyEvent.VK_KP_LEFT:
-                mouse.move(DIRECTION.WEST, null);
-                break;
-
-            case KeyEvent.VK_RIGHT:
-            case KeyEvent.VK_KP_RIGHT:
-                mouse.move(DIRECTION.EAST, null);
-                break;
-
-            case KeyEvent.VK_ESCAPE:
-                System.exit(0);
-                break;
-        }
-
-        boardView.notifyDataChanged();
-        */
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        // Not used
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        // Not used
     }
 }
 

@@ -79,6 +79,7 @@ public class Game extends Canvas implements Runnable {
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
         long timer = System.currentTimeMillis();
+        int updates = 0;
         int frames = 0;
         while (isRunning) {
             long now = System.nanoTime();
@@ -86,7 +87,7 @@ public class Game extends Canvas implements Runnable {
             lastTime = now;
             while(delta >= 1) {
                 tick();
-                //updates++;
+                updates++;
                 delta--;
             }
             render();
@@ -95,8 +96,9 @@ public class Game extends Canvas implements Runnable {
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
                 frames = 0;
-                //updates = 0;
+                updates = 0;
             }
+            //System.out.println("frames = " + frames +'\n' + "updates = " + updates);
         }
         stop();
     }
@@ -172,13 +174,7 @@ public class Game extends Canvas implements Runnable {
                 if(blue == 255 && green == 255){
                     handler.addObject(new EnemySpawmer(xx*32,yy*32,ID.Enemy, handler, ss,this));
                 }
-
             }
         }
     }
-
-    //public static void main(String[] args) {
-
-      //  new Game();
-    //}
 }

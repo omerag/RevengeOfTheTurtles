@@ -30,9 +30,9 @@ public class MVCDriver {
 			}
 		});
 		*/
+		int width = 1024 + 6;
+		int height = 768 + 18;
 
-		new Window(1024 + 6,768 + 18,"Revenge of the Turtles!");
-		//new Game();
-
+		new Window(width,height,"Revenge of the Turtles!");
 	}
 }
