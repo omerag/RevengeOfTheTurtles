@@ -1,7 +1,7 @@
 package Model;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
+
 import Controller.MouseInput;
 import Controller.*;
 import View.ImageRender;
@@ -12,7 +12,7 @@ public class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
     private boolean isRunning = false;
     private Thread thread;
-    private Handler handler;
+    private Mediator mediator;
 
     private ImageRender imageRender;
 
@@ -22,13 +22,16 @@ public class Game extends Canvas implements Runnable {
 
     public Game(int gameWidth, int gameHeight){
 
-        handler = new Handler();
-        this.addKeyListener(new KeyInput(handler));
-        imageRender = new ImageRender(this,handler);
+        mediator = new Mediator();
+        this.addKeyListener(new KeyInput(mediator));
+        imageRender = new ImageRender(this, mediator);
         imageRender.setGameWidth(gameWidth);
         imageRender.setGameHeight(gameHeight);
+        ObjectsContainer objectsContainer = new ObjectsContainer();
+        Factory factory = new Factory(this,gameWidth,gameHeight,mediator,imageRender.getSs(), objectsContainer);
+        mediator.setFactory(factory);
 
-        MouseInput mouseInput = new MouseInput(handler,this, imageRender.getSs());
+        MouseInput mouseInput = new MouseInput(mediator,this, imageRender.getSs());
         mouseInput.setGameHeight(gameHeight);
         mouseInput.setGameWidth(gameWidth);
 
@@ -98,7 +101,7 @@ public class Game extends Canvas implements Runnable {
 
     public void tick(){
 
-        handler.tick();
+        mediator.tick();
         imageRender.setHp(hp);
         imageRender.setScore(score);
     }
@@ -106,4 +109,6 @@ public class Game extends Canvas implements Runnable {
     public void render(){
         imageRender.render();
     }
+
+
 }

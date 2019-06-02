@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Mediator;
 import Model.*;
 
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 public class ImageRender{
 
-    private Handler handler = null;
+    private Mediator mediator = null;
     private Game game = null;
     private int hp;
     private int score;
@@ -20,9 +21,9 @@ public class ImageRender{
     private BufferedImage level;
     private BufferedImage floor;
 
-    public ImageRender(Game game,Handler handler){
+    public ImageRender(Game game, Mediator mediator){
         this.game = game;
-        this.handler = handler;
+        this.mediator = mediator;
 
         BufferImageLoader loader = new BufferImageLoader();
         level = loader.loadImage("/wizard_level - Copy.png");
@@ -50,7 +51,7 @@ public class ImageRender{
             }
         }
 
-        handler.render(g);
+        mediator.render(g);
 
         g.setColor(Color.GRAY);
         g.fillRect(5, 5, 200, 32);
@@ -61,12 +62,9 @@ public class ImageRender{
 
         g.setColor(Color.WHITE);
         g.drawString("Score: " + score, 5, 50);
-        /////////////////////////////////
 
         g.dispose();
         bs.show();
-
-
 
     }
 
@@ -84,16 +82,16 @@ public class ImageRender{
                 int blue = (pixel) & 0xff;
 
                 if(red == 255){
-                    handler.addObject(new Block(xx*32,yy*32, ID.Block, ss, gameWidth,gameHeight));
+                    mediator.addObject(new Block(xx*32,yy*32, ID.Block, ss, gameWidth,gameHeight));
                 }
                 if(green == 255 && blue == 0){
-                    handler.addObject(new Enemy(xx*32,yy*32,ID.Enemy, handler, ss,game,gameWidth,gameHeight));
+                    mediator.addObject(new Enemy(xx*32,yy*32,ID.Enemy, mediator, ss,game,gameWidth,gameHeight));
                 }
                 if(blue == 255 && green == 0){
-                    handler.addObject(new Player(xx*32,yy*32,ID.Player, handler,game,ss,gameWidth,gameHeight));
+                    mediator.addObject(new Player(xx*32,yy*32,ID.Player, mediator,game,ss,gameWidth,gameHeight));
                 }
                 if(blue == 255 && green == 255){
-                    handler.addObject(new EnemySpawmer(xx*32,yy*32,ID.Enemy, handler, ss,game,gameWidth,gameHeight));
+                    mediator.addObject(new EnemySpawner(xx*32,yy*32,ID.Enemy, mediator, ss,game,gameWidth,gameHeight));
                 }
             }
         }

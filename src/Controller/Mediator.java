@@ -1,18 +1,21 @@
-package Model;
+package Controller;
+
+import Model.*;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Handler {
+public class Mediator {
    // LinkedList<GameObject> object = new LinkedList<>();
-    ArrayList<GameObject> object = new ArrayList<>();
+   public ArrayList<GameObject> object = new ArrayList<>();
 
 
     private boolean up = false, down = false, right = false,left = false;
 
     public Bullet tempBullet = null;
     public Player tempPlayer = null;
-
+    public Factory factory;
+    public ObjectsContainer objectsContainer;
 
     public void tick(){
         for(int i = 0; i <object.size(); i++){
@@ -48,6 +51,7 @@ public class Handler {
 
 
     public void addObject(GameObject tempObject){
+
         object.add(tempObject);
     }
 
@@ -115,5 +119,9 @@ public class Handler {
             return true;
 
         return false;
+    }
+
+    public void setFactory(Factory factory) {
+        this.factory = factory;
     }
 }

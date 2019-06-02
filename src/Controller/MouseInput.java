@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Handler;
 import Model.Game;
 import Model.SpriteSheet;
 import Model.Bullet;
@@ -12,7 +11,7 @@ import Model.BulletType;
 
 public class MouseInput extends MouseAdapter {
 
-    private Handler handler;
+    private Mediator mediator;
     private Game game;
     protected SpriteSheet ss;
 
@@ -22,8 +21,8 @@ public class MouseInput extends MouseAdapter {
 
 
 
-    public MouseInput(Handler handler ,Game game, SpriteSheet ss) {
-        this.handler = handler;
+    public MouseInput(Mediator mediator, Game game, SpriteSheet ss) {
+        this.mediator = mediator;
         this.game = game;
         this.ss = ss;
 
@@ -34,17 +33,17 @@ public class MouseInput extends MouseAdapter {
         int mx = e.getX();
         int my = e.getY();
 
-        for (int i = 0; i < handler.getObject().size(); i++){
-            GameObject tempObject = handler.getObject().get(i);
+        for (int i = 0; i < mediator.getObject().size(); i++){
+            GameObject tempObject = mediator.getObject().get(i);
 
 
 
-            if (tempObject.getId() == ID.Player  && handler.getTempBullet() != null){
-                if(isShootable(tempObject.getX(),tempObject.getY(),handler.getTempBullet().getX(),handler.getTempBullet().getY())
-                    && handler.getTempBulletType() == BulletType.ENEMY){
-                    handler.addObject(new Bullet(tempObject.getX() + 16, tempObject.getY() + 24, ID.Bullet, handler, mx, my, ss, BulletType.PALYER, gameWidth, gameHeight));
-                    handler.removeObject(handler.getTempBullet());
-                    handler.setTempBulletToNull();
+            if (tempObject.getId() == ID.Player  && mediator.getTempBullet() != null){
+                if(isShootable(tempObject.getX(),tempObject.getY(), mediator.getTempBullet().getX(), mediator.getTempBullet().getY())
+                    && mediator.getTempBulletType() == BulletType.ENEMY){
+                    mediator.addObject(new Bullet(tempObject.getX() + 16, tempObject.getY() + 24, ID.Bullet, mediator, mx, my, ss, BulletType.PALYER, gameWidth, gameHeight));
+                    mediator.removeObject(mediator.getTempBullet());
+                    mediator.setTempBulletToNull();
                 }
             }
         }

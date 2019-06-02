@@ -1,17 +1,19 @@
 package Model;
 
+import Controller.Mediator;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends GameObject {
 
-    private Handler handler;
+    private Mediator mediator;
     private Game game;
     private BufferedImage wizard_image;
 
-    public Player(int x, int y, ID id, Handler handler, Game game, SpriteSheet ss,int gameWidth, int gameHeight) {
+    public Player(int x, int y, ID id, Mediator mediator, Game game, SpriteSheet ss, int gameWidth, int gameHeight) {
         super(x, y, id, ss,gameWidth,gameHeight);
-        this.handler = handler;
+        this.mediator = mediator;
         this.game = game;
         wizard_image = ss.grabImage(7,1,32,32);
     }
@@ -38,23 +40,23 @@ public class Player extends GameObject {
 
 
         //movement
-        if (handler.isUp()) velY = -3;
-        else if (!handler.isDown()) velY = 0;
+        if (mediator.isUp()) velY = -3;
+        else if (!mediator.isDown()) velY = 0;
 
-        if (handler.isDown()) velY = 3;
-        else if (!handler.isUp()) velY = 0;
+        if (mediator.isDown()) velY = 3;
+        else if (!mediator.isUp()) velY = 0;
 
-        if (handler.isRight()) velX = 3;
-        else if (!handler.isLeft()) velX = 0;
+        if (mediator.isRight()) velX = 3;
+        else if (!mediator.isLeft()) velX = 0;
 
-        if (handler.isLeft()) velX = -3;
-        else if (!handler.isRight()) velX = 0;
+        if (mediator.isLeft()) velX = -3;
+        else if (!mediator.isRight()) velX = 0;
     }
 
     private void collision(){
-        for(int i = 0; i < handler.object.size();i++){
+        for(int i = 0; i < mediator.object.size(); i++){
 
-            GameObject tempObject = handler.object.get(i);
+            GameObject tempObject = mediator.object.get(i);
 
             if(tempObject.getId() == ID.Enemy){
                 if(getBounds().intersects(tempObject.getBounds())){

@@ -1,28 +1,28 @@
 package Controller;
 
-import Model.*;
-import View.*;
-import Model.Handler;
+import Model.GameObject;
+import Model.ID;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class KeyInput extends KeyAdapter {
-     Handler handler;
+     Mediator mediator;
 
-    public KeyInput(Handler handler){
-        this.handler = handler;
+    public KeyInput(Mediator mediator){
+        this.mediator = mediator;
     }
 
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
-        for (int i = 0; i<handler.getObject().size(); i++){
-            GameObject tempObject = handler.getObject().get(i);
+        for (int i = 0; i< mediator.getObject().size(); i++){
+            GameObject tempObject = mediator.getObject().get(i);
 
             if(tempObject.getId()== ID.Player){
-                if(key == KeyEvent.VK_W) handler.setUp(true);
-                if(key == KeyEvent.VK_S) handler.setDown(true);
-                if(key == KeyEvent.VK_A) handler.setLeft(true);
-                if(key == KeyEvent.VK_D) handler.setRight(true);
+                if(key == KeyEvent.VK_W) mediator.setUp(true);
+                if(key == KeyEvent.VK_S) mediator.setDown(true);
+                if(key == KeyEvent.VK_A) mediator.setLeft(true);
+                if(key == KeyEvent.VK_D) mediator.setRight(true);
             }
         }
     }
@@ -30,14 +30,14 @@ public class KeyInput extends KeyAdapter {
     public void keyReleased(KeyEvent e){
 
         int key = e.getKeyCode();
-        for (int i = 0; i<handler.getObject().size(); i++){
-            GameObject tempObject = handler.getObject().get(i);
+        for (int i = 0; i< mediator.getObject().size(); i++){
+            GameObject tempObject = mediator.getObject().get(i);
 
             if(tempObject.getId()== ID.Player){
-                if(key == KeyEvent.VK_W) handler.setUp(false);
-                if(key == KeyEvent.VK_S) handler.setDown(false);
-                if(key == KeyEvent.VK_A) handler.setLeft(false);
-                if(key == KeyEvent.VK_D) handler.setRight(false);
+                if(key == KeyEvent.VK_W) mediator.setUp(false);
+                if(key == KeyEvent.VK_S) mediator.setDown(false);
+                if(key == KeyEvent.VK_A) mediator.setLeft(false);
+                if(key == KeyEvent.VK_D) mediator.setRight(false);
 
             }
         }

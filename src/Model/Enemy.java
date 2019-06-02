@@ -1,12 +1,14 @@
 package Model;
 
+import Controller.Mediator;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Enemy extends GameObject {
 
-    private Handler handler;
+    private Mediator mediator;
     Random r = new Random();
     int choose = 0;
     int hp = 100;
@@ -15,9 +17,9 @@ public class Enemy extends GameObject {
     private Game game;
     private int isStuck = 60;
 
-    public Enemy(int x, int y, ID id,Handler handler, SpriteSheet ss, Game game,int gameWidth, int gameHeight) {
+    public Enemy(int x, int y, ID id, Mediator mediator, SpriteSheet ss, Game game, int gameWidth, int gameHeight) {
         super(x, y, id, ss ,gameWidth, gameHeight);
-        this.handler = handler;
+        this.mediator = mediator;
         this.game = game;
         enemy_image = ss.grabImage(7,2,32,32);
     }
@@ -38,8 +40,8 @@ public class Enemy extends GameObject {
 
         choose = r.nextInt(100);
 
-        for(int i = 0; i< handler.object.size(); i++){
-            GameObject tempObject = handler.object.get(i);
+        for(int i = 0; i< mediator.object.size(); i++){
+            GameObject tempObject = mediator.object.get(i);
 
             if(tempObject.getId()== ID.Player){
                 xPlayer = tempObject.getX();
@@ -55,7 +57,7 @@ public class Enemy extends GameObject {
                     velY *= -1 ;
                     isStuck--;
                     if(isStuck < 1){
-                        handler.removeObject(this);
+                        mediator.removeObject(this);
                     }
                 }
                 else
@@ -73,7 +75,7 @@ public class Enemy extends GameObject {
                 if(getBounds().intersects(tempObject.getBounds()) &&
                         tempBullet.getBulletType() == BulletType.PALYER){
                     hp -= 100;
-                    handler.removeObject(tempObject);
+                    mediator.removeObject(tempObject);
                     game.score++;
 
 
@@ -82,7 +84,7 @@ public class Enemy extends GameObject {
         }
 
         if(hp <= 0){
-            handler.removeObject(this);
+            mediator.removeObject(this);
         }
 
         if(choose == 0){
@@ -91,8 +93,8 @@ public class Enemy extends GameObject {
 
         }
         if(r.nextInt(200) == 0){
-            handler.addObject(new Bullet(this.getX() +16 , this.getY()+ 16,
-                    ID.Bullet, handler, xPlayer, yPlayer, ss,BulletType.ENEMY,gameWidth,gameHeight));
+            mediator.addObject(new Bullet(this.getX() +16 , this.getY()+ 16,
+                    ID.Bullet, mediator, xPlayer, yPlayer, ss,BulletType.ENEMY,gameWidth,gameHeight));
 
         }
 
