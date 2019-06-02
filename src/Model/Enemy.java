@@ -29,8 +29,8 @@ public class Enemy extends GameObject {
 
 
         if(x <= 32 || x >= gameWidth - 64 || y < 32 || y >= gameHeight - 96){
-            x += velX*5 * -1;
-            y += velY*5 * -1;
+            x += velX*3 * -1;
+            y += velY*3 * -1;
             velX *= -1;
             velY *= -1 ;
         }
