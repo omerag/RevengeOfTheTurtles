@@ -14,8 +14,8 @@ public class EnemySpawmer extends GameObject {
 
 
 
-    public EnemySpawmer(int x, int y, ID id, Handler handler, SpriteSheet ss,Game game ){
-        super(x, y, id, ss);
+    public EnemySpawmer(int x, int y, ID id, Handler handler, SpriteSheet ss,Game game ,int gameWidth, int gameHeight){
+        super(x, y, id, ss,gameWidth, gameHeight);
         this.handler = handler;
         this.game = game;
         enemy_image = ss.grabImage(6,1,32,32);
@@ -27,7 +27,7 @@ public class EnemySpawmer extends GameObject {
         x += velX;
         y += velY;
 
-        if(x <= 32 || x >= 1024 - 64 || y < 32 || y >= 768 - 96){
+        if(x <= 32 || x >= gameWidth - 64 || y < 32 || y >= gameHeight - 118){
                 x += velX*5 * -1;
                 y += velY*5 * -1;
                 velX *= -1;
@@ -40,7 +40,7 @@ public class EnemySpawmer extends GameObject {
 
         }
         if(r.nextInt(500) < level){
-            handler.addObject(new Enemy(this.getX() + 16,this.getY() + 16,ID.Enemy,handler,ss,game));
+            handler.addObject(new Enemy(this.getX() + 16,this.getY() + 16,ID.Enemy,handler,ss,game,gameWidth, gameHeight));
             if(r.nextInt(10) == 0 && level < 10){
                     level++;
                 System.out.println("level = " + level);

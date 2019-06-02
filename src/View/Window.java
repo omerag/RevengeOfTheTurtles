@@ -97,7 +97,7 @@ public class Window extends JFrame implements ActionListener {
 
 
     private void newGame() {
-        _game = new Game();
+        _game = new Game(getWidth(),getHeight());
         add(_game,BorderLayout.CENTER);
     }
 

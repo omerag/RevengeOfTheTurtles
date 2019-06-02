@@ -9,8 +9,8 @@ public class Player extends GameObject {
     Game game;
     private BufferedImage wizard_image;
 
-    public Player(int x, int y, ID id, Handler handler, Game game, SpriteSheet ss) {
-        super(x, y, id, ss);
+    public Player(int x, int y, ID id, Handler handler, Game game, SpriteSheet ss,int gameWidth, int gameHeight) {
+        super(x, y, id, ss,gameWidth,gameHeight);
         this.handler = handler;
         this.game = game;
         wizard_image = ss.grabImage(7,1,32,32);
@@ -20,6 +20,15 @@ public class Player extends GameObject {
     public void tick() {
         x += velX;
         y += velY;
+
+
+        if(x <= 32 || x >= gameWidth - 64 || y < 32 || y >= gameHeight - 118){
+            x += velX* -1;
+            y += velY* -1;
+            velX *= -1;
+            velY *= -1 ;
+        }
+
 
         try{
             collision();
@@ -46,13 +55,15 @@ public class Player extends GameObject {
         for(int i = 0; i < handler.object.size();i++){
 
             GameObject tempObject = handler.object.get(i);
-
+/*
             if(tempObject.getId() == ID.Block){
                 if(getBounds().intersects(tempObject.getBounds())){
                     x += velX * -1 ;
                     y += velY * -1 ;
                 }
             }
+            */
+
             /*
             if(tempObject.getId() == ID.Crate){
                 if(getBounds().intersects(tempObject.getBounds())){

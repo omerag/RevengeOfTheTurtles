@@ -12,6 +12,8 @@ public class ImageRender{
     private Game game = null;
     private int hp;
     private int score;
+    int gameWidth;
+    int gameHeight;
 
     private SpriteSheet ss;
 
@@ -82,16 +84,16 @@ public class ImageRender{
                 int blue = (pixel) & 0xff;
 
                 if(red == 255){
-                    handler.addObject(new Block(xx*32,yy*32, ID.Block, ss));
+                    handler.addObject(new Block(xx*32,yy*32, ID.Block, ss, gameWidth,gameHeight));
                 }
                 if(green == 255 && blue == 0){
-                    handler.addObject(new Enemy(xx*32,yy*32,ID.Enemy, handler, ss,game));
+                    handler.addObject(new Enemy(xx*32,yy*32,ID.Enemy, handler, ss,game,gameWidth,gameHeight));
                 }
                 if(blue == 255 && green == 0){
-                    handler.addObject(new Player(xx*32,yy*32,ID.Player, handler,game,ss));
+                    handler.addObject(new Player(xx*32,yy*32,ID.Player, handler,game,ss,gameWidth,gameHeight));
                 }
                 if(blue == 255 && green == 255){
-                    handler.addObject(new EnemySpawmer(xx*32,yy*32,ID.Enemy, handler, ss,game));
+                    handler.addObject(new EnemySpawmer(xx*32,yy*32,ID.Enemy, handler, ss,game,gameWidth,gameHeight));
                 }
             }
         }
@@ -107,5 +109,13 @@ public class ImageRender{
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void setGameWidth(int gameWidth) {
+        this.gameWidth = gameWidth;
+    }
+
+    public void setGameHeight(int gameHeight) {
+        this.gameHeight = gameHeight;
     }
 }

@@ -17,6 +17,8 @@ public class MouseInput extends MouseAdapter {
     protected SpriteSheet ss;
 
     private Bullet tempBullet = null;
+    int gameWidth;
+    int gameHeight;
 
 
 
@@ -40,7 +42,7 @@ public class MouseInput extends MouseAdapter {
             if (tempObject.getId() == ID.Player  && handler.getTempBullet() != null){
                 if(isShootable(tempObject.getX(),tempObject.getY(),handler.getTempBullet().getX(),handler.getTempBullet().getY())
                     && handler.getTempBulletType() == BulletType.ENEMY){
-                    handler.addObject(new Bullet(tempObject.getX() + 16, tempObject.getY() + 24, ID.Bullet, handler, mx, my, ss, BulletType.PALYER));
+                    handler.addObject(new Bullet(tempObject.getX() + 16, tempObject.getY() + 24, ID.Bullet, handler, mx, my, ss, BulletType.PALYER, gameWidth, gameHeight));
                     handler.removeObject(handler.getTempBullet());
                     handler.setTempBulletToNull();
                 }
@@ -66,4 +68,11 @@ public class MouseInput extends MouseAdapter {
         return false;
     }
 
+    public void setGameWidth(int gameWidth) {
+        this.gameWidth = gameWidth;
+    }
+
+    public void setGameHeight(int gameHeight) {
+        this.gameHeight = gameHeight;
+    }
 }
