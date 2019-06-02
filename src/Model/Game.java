@@ -20,13 +20,20 @@ public class Game extends Canvas implements Runnable {
     int hp = 100;
 
 
-    public Game(){
+    public Game(int gameWidth, int gameHeight){
 
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
         imageRender = new ImageRender(this,handler);
+        imageRender.setGameWidth(gameWidth);
+        imageRender.setGameHeight(gameHeight);
 
-        this.addMouseListener(new MouseInput(handler,this, imageRender.getSs()));
+        MouseInput mouseInput = new MouseInput(handler,this, imageRender.getSs());
+        mouseInput.setGameHeight(gameHeight);
+        mouseInput.setGameWidth(gameWidth);
+
+        this.addMouseListener(mouseInput);
+
 
         imageRender.loadLevel();
     }

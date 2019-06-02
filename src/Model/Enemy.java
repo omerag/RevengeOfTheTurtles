@@ -15,8 +15,8 @@ public class Enemy extends GameObject {
     private Game game;
     private int isStuck = 60;
 
-    public Enemy(int x, int y, ID id,Handler handler, SpriteSheet ss, Game game) {
-        super(x, y, id, ss);
+    public Enemy(int x, int y, ID id,Handler handler, SpriteSheet ss, Game game,int gameWidth, int gameHeight) {
+        super(x, y, id, ss ,gameWidth, gameHeight);
         this.handler = handler;
         this.game = game;
         enemy_image = ss.grabImage(7,2,32,32);
@@ -27,6 +27,15 @@ public class Enemy extends GameObject {
         x += velX;
         y += velY;
 
+
+        if(x <= 32 || x >= gameWidth - 64 || y < 32 || y >= gameHeight - 96){
+            x += velX*5 * -1;
+            y += velY*5 * -1;
+            velX *= -1;
+            velY *= -1 ;
+        }
+
+
         choose = r.nextInt(100);
 
         for(int i = 0; i< handler.object.size(); i++){
@@ -36,6 +45,7 @@ public class Enemy extends GameObject {
                 xPlayer = tempObject.getX();
                 yPlayer = tempObject.getY();
             }
+/*
 
             if(tempObject.getId() == ID.Block){
                 if(getBoundsBig().intersects(tempObject.getBounds())){
@@ -55,6 +65,7 @@ public class Enemy extends GameObject {
 
                     }
             }
+*/
 
 
             if(tempObject.getId() == ID.Bullet ){
@@ -81,7 +92,7 @@ public class Enemy extends GameObject {
         }
         if(r.nextInt(200) == 0){
             handler.addObject(new Bullet(this.getX() +16 , this.getY()+ 16,
-                    ID.Bullet, handler, xPlayer, yPlayer, ss,BulletType.ENEMY));
+                    ID.Bullet, handler, xPlayer, yPlayer, ss,BulletType.ENEMY,gameWidth,gameHeight));
 
         }
 

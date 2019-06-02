@@ -14,8 +14,8 @@ public class Bullet extends GameObject{
     private int state = 1;
 
 
-    public Bullet(int x, int y, ID id, Handler handler, int mx, int my, SpriteSheet ss, BulletType bulletType) {
-        super(x, y, id, ss);
+    public Bullet(int x, int y, ID id, Handler handler, int mx, int my, SpriteSheet ss, BulletType bulletType,int gameWidth, int gameHeight) {
+        super(x, y, id, ss,gameWidth,gameHeight);
         this.handler = handler;
         if(bulletType ==BulletType.PALYER){
             velX = (mx - x)*0.05f;
@@ -40,6 +40,13 @@ public class Bullet extends GameObject{
         x +=velX;
         y +=velY;
 
+
+        if(x <= 32 || x >= gameWidth - 64 || y < 32 || y >= gameHeight - 96){
+            handler.removeObject(this);
+
+        }
+
+/*
         for(int i = 0; i < handler.object.size();i++) {
             GameObject tempObject = handler.object.get(i);
 
@@ -49,6 +56,8 @@ public class Bullet extends GameObject{
                 }
             }
         }
+        */
+
         BufferedImage tempImage = bullet_image;
         bullet_image = bullet_image2;
         bullet_image2 = bullet_image3;
