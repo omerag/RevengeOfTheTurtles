@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Game;
 import Controller.Mediator;
 import Model.*;
 
@@ -13,8 +14,7 @@ public class ImageRender{
     private Game game = null;
     private int hp;
     private int score;
-    int gameWidth;
-    int gameHeight;
+
 
     private SpriteSheet ss;
 
@@ -51,7 +51,23 @@ public class ImageRender{
             }
         }
 
-        mediator.render(g);
+        ObjectsContainer objectsContainer = mediator.objectsContainer;
+
+        for(Block block : objectsContainer.getBlockList()){
+            block.render(g);
+        }
+
+        for(int i = 0; i <objectsContainer.getEnemyList().size() ; i++){
+            Enemy enemy = objectsContainer.getEnemyList().get(i);
+            enemy.render(g);
+        }
+        for(int i = 0; i < objectsContainer.getBulletList().size(); i++){
+            Bullet bullet = objectsContainer.getBulletList().get(i);
+            bullet.render(g);
+        }
+
+        objectsContainer.getEnemySpawner().render(g);
+        objectsContainer.getPlayer().render(g);
 
         g.setColor(Color.GRAY);
         g.fillRect(5, 5, 200, 32);
@@ -82,16 +98,16 @@ public class ImageRender{
                 int blue = (pixel) & 0xff;
 
                 if(red == 255){
-                    mediator.addObject(new Block(xx*32,yy*32, ID.Block, ss, gameWidth,gameHeight));
+                    mediator.factory.newBlock(xx*32,yy*32);
                 }
                 if(green == 255 && blue == 0){
-                    mediator.addObject(new Enemy(xx*32,yy*32,ID.Enemy, mediator, ss,game,gameWidth,gameHeight));
+                    mediator.factory.newEnemy(xx*32,yy*32);
                 }
                 if(blue == 255 && green == 0){
-                    mediator.addObject(new Player(xx*32,yy*32,ID.Player, mediator,game,ss,gameWidth,gameHeight));
+                    mediator.factory.newPlayer(xx*32,yy*32);
                 }
                 if(blue == 255 && green == 255){
-                    mediator.addObject(new EnemySpawner(xx*32,yy*32,ID.Enemy, mediator, ss,game,gameWidth,gameHeight));
+                    mediator.factory.newEnemySpawmer(xx*32,yy*32);
                 }
             }
         }
@@ -109,11 +125,4 @@ public class ImageRender{
         this.score = score;
     }
 
-    public void setGameWidth(int gameWidth) {
-        this.gameWidth = gameWidth;
-    }
-
-    public void setGameHeight(int gameHeight) {
-        this.gameHeight = gameHeight;
-    }
 }

@@ -3,14 +3,10 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.net.URL;
-import Model.Game;
+
+import Controller.Game;
 
 public class Window extends JFrame implements ActionListener {
     private static final String ACTION_NEW_GAME = "newGame";

@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Game;
 import Controller.Mediator;
 
 import java.awt.*;
@@ -9,13 +10,13 @@ public class Player extends GameObject {
 
     private Mediator mediator;
     private Game game;
-    private BufferedImage wizard_image;
+    private BufferedImage player_image;
 
     public Player(int x, int y, ID id, Mediator mediator, Game game, SpriteSheet ss, int gameWidth, int gameHeight) {
         super(x, y, id, ss,gameWidth,gameHeight);
         this.mediator = mediator;
         this.game = game;
-        wizard_image = ss.grabImage(7,1,32,32);
+        player_image = ss.grabImage(7,1,32,32);
     }
 
     @Override
@@ -54,35 +55,32 @@ public class Player extends GameObject {
     }
 
     private void collision(){
-        for(int i = 0; i < mediator.object.size(); i++){
 
-            GameObject tempObject = mediator.object.get(i);
 
-            if(tempObject.getId() == ID.Enemy){
-                if(getBounds().intersects(tempObject.getBounds())){
-                    game.hp -= 3;
-                    if(game.hp <= 0){
-                        System.out.println("you died");
-                    }
-                }
-            }
 
-            if(tempObject.getId() == ID.Bullet){
-                Bullet tempBullet = (Bullet)tempObject;
-                if((tempBullet.getBulletType() == BulletType.ENEMY) &&
-                        getBounds().intersects(tempObject.getBounds())){
-                    game.hp -= 1;
-                    if(game.hp == 0){
-                        System.out.println("you died");
-                    }
+        for(Enemy enemy : mediator.objectsContainer.getEnemyList()){
+            if(getBounds().intersects(enemy.getBounds())){
+                game.hp -= 3;
+                if(game.hp <= 0){
+                    //...
                 }
             }
         }
+
+        for(Bullet bullet : mediator.objectsContainer.getBulletList()){
+            if(getBounds().intersects(bullet.getBounds())){
+                game.hp -= 1;
+                if(game.hp <= 0){
+                    //...
+                }
+            }
+        }
+
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(wizard_image,x,y,null);
+        g.drawImage(player_image,x,y,null);
 
     }
 

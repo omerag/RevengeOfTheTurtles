@@ -1,16 +1,31 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ObjectsContainer {
 
+    public static ObjectsContainer container= null;
+
     private Player player = null;
     private EnemySpawner enemySpawner = null;
     private Bullet reflectableBullet = null;
-    private List<Enemy> enemyList = new ArrayList<Enemy>();
-    private List<Bullet> bulletList = new ArrayList<Bullet>();
-    private List<Block> blockList = new ArrayList<Block>();
+    private List<Enemy> enemyList = Collections.synchronizedList(new ArrayList<Enemy>());
+    private List<Bullet> bulletList = Collections.synchronizedList(new ArrayList<Bullet>());
+    private List<Block> blockList = Collections.synchronizedList(new ArrayList<Block>());
+
+
+    private ObjectsContainer(){
+        //nothing...
+    }
+
+    public static ObjectsContainer getInstance(){
+        if(container == null){
+            container = new ObjectsContainer();
+        }
+        return container;
+    }
 
     void addPlayer(Player player){
         if(this.player == null){
@@ -28,20 +43,24 @@ public class ObjectsContainer {
         this.reflectableBullet = reflectableBullet;
     }
 
-    void addEnemy(Enemy enemy){
+    public void addEnemy(Enemy enemy){
         enemyList.add(enemy);
     }
     
-    void removeEnemy(Enemy enemy){
+    public void removeEnemy(Enemy enemy){
         enemyList.remove(enemy);
     }
 
-    void addBullet(Bullet bullet){
+    public void addBullet(Bullet bullet){
         bulletList.add(bullet);
     }
     
-    void removeBullet(Bullet bullet){
-        bulletList.remove(bullet);
+   public void removeBullet(Bullet bullet){
+       bulletList.remove(bullet);
+    }
+
+   public void addBlock(Block block) {
+        blockList.add(block);
     }
 
     public Player getPlayer() {
@@ -56,6 +75,8 @@ public class ObjectsContainer {
         return enemyList;
     }
 
+    public Bullet getReflectableBullet(){ return reflectableBullet;}
+
     public List<Bullet> getBulletList() {
         return bulletList;
     }
@@ -63,5 +84,6 @@ public class ObjectsContainer {
     public List<Block> getBlockList() {
         return blockList;
     }
+
 }
 

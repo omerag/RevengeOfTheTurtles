@@ -15,6 +15,13 @@ public class KeyInput extends KeyAdapter {
 
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
+
+        if(key == KeyEvent.VK_W) mediator.setUp(true);
+        if(key == KeyEvent.VK_S) mediator.setDown(true);
+        if(key == KeyEvent.VK_A) mediator.setLeft(true);
+        if(key == KeyEvent.VK_D) mediator.setRight(true);
+
+/*
         for (int i = 0; i< mediator.getObject().size(); i++){
             GameObject tempObject = mediator.getObject().get(i);
 
@@ -25,11 +32,19 @@ public class KeyInput extends KeyAdapter {
                 if(key == KeyEvent.VK_D) mediator.setRight(true);
             }
         }
+        */
+
     }
 
     public void keyReleased(KeyEvent e){
 
         int key = e.getKeyCode();
+        if(key == KeyEvent.VK_W) mediator.setUp(false);
+        if(key == KeyEvent.VK_S) mediator.setDown(false);
+        if(key == KeyEvent.VK_A) mediator.setLeft(false);
+        if(key == KeyEvent.VK_D) mediator.setRight(false);
+/*
+
         for (int i = 0; i< mediator.getObject().size(); i++){
             GameObject tempObject = mediator.getObject().get(i);
 
@@ -41,6 +56,7 @@ public class KeyInput extends KeyAdapter {
 
             }
         }
+*/
 
     }
 

@@ -19,7 +19,7 @@ public class Bullet extends GameObject{
     public Bullet(int x, int y, ID id, Mediator mediator, int mx, int my, SpriteSheet ss, BulletType bulletType, int gameWidth, int gameHeight) {
         super(x, y, id, ss,gameWidth,gameHeight);
         this.mediator = mediator;
-        if(bulletType ==BulletType.PALYER){
+        if(bulletType ==BulletType.PLAYER){
             velX = (mx - x)*0.05f;
             velY = (my - y)*0.05f;
         }
@@ -44,21 +44,10 @@ public class Bullet extends GameObject{
 
 
         if(x <= 32 || x >= gameWidth - 64 || y < 32 || y >= gameHeight - 96){
-            mediator.removeObject(this);
-
+            mediator.objectsContainer.removeBullet(this);
+            return;
         }
 
-/*
-        for(int i = 0; i < mediator.object.size();i++) {
-            GameObject tempObject = mediator.object.get(i);
-
-            if (tempObject.getId() == ID.Block){
-                if (getBounds().intersects(tempObject.getBounds())) {
-                    mediator.removeObject(this);
-                }
-            }
-        }
-        */
 
         BufferedImage tempImage = bullet_image;
         bullet_image = bullet_image2;

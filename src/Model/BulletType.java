@@ -1,6 +1,6 @@
 package Model;
 
 public enum BulletType {
-    PALYER(),
+    PLAYER(),
     ENEMY();
 }

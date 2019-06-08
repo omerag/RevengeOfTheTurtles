@@ -1,9 +1,11 @@
-package Model;
+package Controller;
 
 import java.awt.*;
 
 import Controller.MouseInput;
 import Controller.*;
+import Model.Factory;
+import Model.ObjectsContainer;
 import View.ImageRender;
 
 
@@ -16,27 +18,23 @@ public class Game extends Canvas implements Runnable {
 
     private ImageRender imageRender;
 
-    int score = 0;
-    int hp = 100;
+    public int score = 0;
+    public int hp = 100;
 
 
     public Game(int gameWidth, int gameHeight){
 
         mediator = new Mediator();
-        this.addKeyListener(new KeyInput(mediator));
         imageRender = new ImageRender(this, mediator);
-        imageRender.setGameWidth(gameWidth);
-        imageRender.setGameHeight(gameHeight);
-        ObjectsContainer objectsContainer = new ObjectsContainer();
-        Factory factory = new Factory(this,gameWidth,gameHeight,mediator,imageRender.getSs(), objectsContainer);
+
+        ObjectsContainer.getInstance();
+        Factory factory = new Factory(this,gameWidth,gameHeight,mediator,imageRender.getSs());
         mediator.setFactory(factory);
 
-        MouseInput mouseInput = new MouseInput(mediator,this, imageRender.getSs());
-        mouseInput.setGameHeight(gameHeight);
-        mouseInput.setGameWidth(gameWidth);
+        MouseInput mouseInput = new MouseInput(mediator);
 
         this.addMouseListener(mouseInput);
-
+        this.addKeyListener(new KeyInput(mediator));
 
         imageRender.loadLevel();
     }

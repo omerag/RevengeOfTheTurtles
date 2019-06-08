@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Game;
 import Controller.Mediator;
 
 import java.awt.*;
@@ -9,10 +10,8 @@ import java.util.Random;
 public class Enemy extends GameObject {
 
     private Mediator mediator;
-    Random r = new Random();
-    int choose = 0;
-    int hp = 100;
-    int xPlayer = 0, yPlayer = 0;
+    private Random r = new Random();
+    private int xPlayer = 0, yPlayer = 0;
     private BufferedImage enemy_image;
     private Game game;
     private int isStuck = 60;
@@ -38,63 +37,29 @@ public class Enemy extends GameObject {
         }
 
 
-        choose = r.nextInt(100);
-
-        for(int i = 0; i< mediator.object.size(); i++){
-            GameObject tempObject = mediator.object.get(i);
-
-            if(tempObject.getId()== ID.Player){
-                xPlayer = tempObject.getX();
-                yPlayer = tempObject.getY();
-            }
-/*
-
-            if(tempObject.getId() == ID.Block){
-                if(getBoundsBig().intersects(tempObject.getBounds())){
-                    x += velX*5 * -1;
-                    y += velY*5 * -1;
-                    velX *= -1;
-                    velY *= -1 ;
-                    isStuck--;
-                    if(isStuck < 1){
-                        mediator.removeObject(this);
-                    }
-                }
-                else
-                    if(choose == 0) {
-                        velX = (r.nextInt(1 - -1) + -1);
-                        velY = (r.nextInt(1 - -1) + -1);
-
-                    }
-            }
-*/
+        xPlayer = mediator.objectsContainer.getPlayer().getX();
+        yPlayer = mediator.objectsContainer.getPlayer().getY();
 
 
-            if(tempObject.getId() == ID.Bullet ){
-                Bullet tempBullet = (Bullet)tempObject;
-                if(getBounds().intersects(tempObject.getBounds()) &&
-                        tempBullet.getBulletType() == BulletType.PALYER){
-                    hp -= 100;
-                    mediator.removeObject(tempObject);
-                    game.score++;
-
-
-                }
+        for(int i = 0; i < mediator.objectsContainer.getBulletList().size(); i++){
+            Bullet bullet = mediator.objectsContainer.getBulletList().get(i);
+            if(getBounds().intersects(bullet.getBounds()) &&
+                    bullet.getBulletType() == BulletType.PLAYER){
+                mediator.objectsContainer.removeBullet(bullet);
+                mediator.objectsContainer.removeEnemy(this);
+                game.score++;
+                return;
             }
         }
 
-        if(hp <= 0){
-            mediator.removeObject(this);
-        }
 
-        if(choose == 0){
+        if(r.nextInt(100) == 0){
             velX = (r.nextInt(1 - -1) + -1);
             velY = (r.nextInt(1 - -1) + -1);
 
         }
         if(r.nextInt(200) == 0){
-            mediator.addObject(new Bullet(this.getX() +16 , this.getY()+ 16,
-                    ID.Bullet, mediator, xPlayer, yPlayer, ss,BulletType.ENEMY,gameWidth,gameHeight));
+            mediator.factory.newEnemyBullet(x,y,xPlayer,yPlayer);
 
         }
 

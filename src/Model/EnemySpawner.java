@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Game;
 import Controller.Mediator;
 
 import java.awt.*;
@@ -21,6 +22,7 @@ public class EnemySpawner extends GameObject {
         this.mediator = mediator;
         this.game = game;
         enemy_image = ss.grabImage(6,1,32,32);
+
     }
 
     @Override
@@ -41,8 +43,8 @@ public class EnemySpawner extends GameObject {
             velY = (r.nextInt(4 - -4) + -4);
 
         }
-        if(r.nextInt(500) < level){
-            mediator.addObject(new Enemy(this.getX() + 16,this.getY() + 16,ID.Enemy, mediator,ss,game,gameWidth, gameHeight));
+        if(r.nextInt(200) < level){
+            mediator.factory.newEnemy(x,y);
             if(r.nextInt(10) == 0 && level < 10){
                     level++;
                 System.out.println("level = " + level);

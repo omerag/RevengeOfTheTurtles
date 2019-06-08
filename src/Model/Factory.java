@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Game;
 import Controller.Mediator;
 
 public class Factory {
@@ -12,11 +13,11 @@ public class Factory {
     private int gameHeight;
 
     public Factory(Game game, int gameWidth, int gameHeight,
-                   Mediator mediator, SpriteSheet spriteSheet, ObjectsContainer objectsContainer){
+                   Mediator mediator, SpriteSheet spriteSheet){
         this.mediator = mediator;
         this.game = game;
         this.spriteSheet = spriteSheet;
-        this.objectsContainer = objectsContainer;
+        objectsContainer = ObjectsContainer.getInstance();
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
     }
@@ -29,6 +30,7 @@ public class Factory {
 
     public Block newBlock(int x, int y){
         Block block = new Block(x,y,ID.Block,spriteSheet,gameWidth,gameHeight);
+        objectsContainer.addBlock(block);
         return block;
     }
 
@@ -51,7 +53,7 @@ public class Factory {
     }
 
     public Bullet newFriendlyBullet(int x, int y, int mx, int my){
-        Bullet bullet = new Bullet(x,y,ID.Bullet, mediator,mx, my,spriteSheet,BulletType.PALYER,gameWidth,gameHeight);
+        Bullet bullet = new Bullet(x,y,ID.Bullet, mediator,mx, my,spriteSheet,BulletType.PLAYER,gameWidth,gameHeight);
         objectsContainer.addBullet(bullet);
         return bullet;
     }
