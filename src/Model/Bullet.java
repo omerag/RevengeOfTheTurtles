@@ -16,8 +16,8 @@ public class Bullet extends GameObject{
     private int state = 1;
 
 
-    public Bullet(int x, int y, ID id, Mediator mediator, int mx, int my, SpriteSheet ss, BulletType bulletType, int gameWidth, int gameHeight) {
-        super(x, y, id, ss,gameWidth,gameHeight);
+    public Bullet(int x, int y, ID id, Mediator mediator, int mx, int my, BulletType bulletType, int gameWidth, int gameHeight) {
+        super(x, y, id,gameWidth,gameHeight);
         this.mediator = mediator;
         if(bulletType ==BulletType.PLAYER){
             velX = (mx - x)*0.05f;
@@ -30,9 +30,9 @@ public class Bullet extends GameObject{
         }
 
         this.bulletType = bulletType;
-        bullet_image = ss.grabImage(1,3,16,16);
-        bullet_image2 = ss.grabImage(2,3,16,16);
-        bullet_image3 = ss.grabImage(3,3,16,16);
+        bullet_image = SpriteContainer.getInstance().getGeneral_sheet().grabImage(1,3,16,16,32);
+        bullet_image2 = SpriteContainer.getInstance().getGeneral_sheet().grabImage(2,3,16,16,32);
+        bullet_image3 = SpriteContainer.getInstance().getGeneral_sheet().grabImage(3,3,16,16,32);
     }
 
 

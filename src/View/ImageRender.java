@@ -10,8 +10,8 @@ import java.awt.image.BufferedImage;
 
 public class ImageRender{
 
-    private Mediator mediator = null;
-    private Game game = null;
+    private Mediator mediator;
+    private Game game;
     private int hp;
     private int score;
 
@@ -30,7 +30,7 @@ public class ImageRender{
         BufferedImage sprite_sheet = loader.loadImage("/sprite_sheet.png");
 
         ss = new SpriteSheet(sprite_sheet);
-        floor = ss.grabImage(4,2,32,32);
+        floor = ss.grabImage(4,2,32,32,32);
     }
 
     public void render(){

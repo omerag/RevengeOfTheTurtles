@@ -7,9 +7,9 @@ public class Block extends GameObject {
 
     private BufferedImage block_image;
 
-    public Block(int x, int y, ID id, SpriteSheet ss,int gameWidth,int gameHeight) {
-        super(x, y, id, ss,gameWidth,gameHeight);
-        block_image = ss.grabImage(5,2,32,32);
+    public Block(int x, int y, ID id ,int gameWidth,int gameHeight) {
+        super(x, y, id,gameWidth,gameHeight);
+        block_image = SpriteContainer.getInstance().getGeneral_sheet().grabImage(5,2,32,32,32);
     }
 
     @Override

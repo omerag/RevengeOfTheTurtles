@@ -23,37 +23,37 @@ public class Factory {
     }
 
     public Player newPlayer(int x, int y){
-        Player player = new Player(x,y,ID.Player, mediator,game,spriteSheet,gameWidth, gameHeight);
+        Player player = new Player(x,y,ID.Player, mediator,game,gameWidth, gameHeight);
         objectsContainer.addPlayer(player);
         return player;
     }
 
     public Block newBlock(int x, int y){
-        Block block = new Block(x,y,ID.Block,spriteSheet,gameWidth,gameHeight);
+        Block block = new Block(x,y,ID.Block,gameWidth,gameHeight);
         objectsContainer.addBlock(block);
         return block;
     }
 
     public EnemySpawner newEnemySpawmer(int x, int y){
-        EnemySpawner enemySpawner = new EnemySpawner(x,y,ID.Enemy, mediator,spriteSheet,game,gameWidth,gameHeight);
+        EnemySpawner enemySpawner = new EnemySpawner(x,y,ID.Enemy, mediator,game,gameWidth,gameHeight);
         objectsContainer.addEnemySpawner(enemySpawner);
         return enemySpawner;
     }
 
     public Enemy newEnemy(int x, int y){
-        Enemy enemy = new Enemy(x,y, ID.Enemy, mediator,spriteSheet,game,gameWidth,gameHeight);
+        Enemy enemy = new Enemy(x,y, ID.Enemy, mediator,game,gameWidth,gameHeight);
         objectsContainer.addEnemy(enemy);
         return enemy;
     }
 
     public Bullet newEnemyBullet(int x, int y,int mx, int my){
-        Bullet bullet = new Bullet(x,y,ID.Bullet, mediator,mx, my,spriteSheet,BulletType.ENEMY,gameWidth,gameHeight);
+        Bullet bullet = new Bullet(x,y,ID.Bullet, mediator,mx, my,BulletType.ENEMY,gameWidth,gameHeight);
         objectsContainer.addBullet(bullet);
         return bullet;
     }
 
     public Bullet newFriendlyBullet(int x, int y, int mx, int my){
-        Bullet bullet = new Bullet(x,y,ID.Bullet, mediator,mx, my,spriteSheet,BulletType.PLAYER,gameWidth,gameHeight);
+        Bullet bullet = new Bullet(x,y,ID.Bullet, mediator,mx, my,BulletType.PLAYER,gameWidth,gameHeight);
         objectsContainer.addBullet(bullet);
         return bullet;
     }

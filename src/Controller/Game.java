@@ -6,6 +6,7 @@ import Controller.MouseInput;
 import Controller.*;
 import Model.Factory;
 import Model.ObjectsContainer;
+import Model.SpriteContainer;
 import View.ImageRender;
 
 
@@ -28,6 +29,8 @@ public class Game extends Canvas implements Runnable {
         imageRender = new ImageRender(this, mediator);
 
         ObjectsContainer.getInstance();
+        SpriteContainer.getInstance();
+
         Factory factory = new Factory(this,gameWidth,gameHeight,mediator,imageRender.getSs());
         mediator.setFactory(factory);
 

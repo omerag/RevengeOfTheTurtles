@@ -7,15 +7,13 @@ public abstract class GameObject {
     protected int x,y;
     protected float velX = 0, velY = 0;
     protected ID id;
-    protected SpriteSheet ss;
     int gameWidth;
     int gameHeight;
 
-    public GameObject(int x, int y,ID id,SpriteSheet ss,int gameWidth, int gameHeight) {
+    public GameObject(int x, int y,ID id,int gameWidth, int gameHeight) {
         this.x = x;
         this.y = y;
         this.id = id;
-        this.ss = ss;
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
     }
