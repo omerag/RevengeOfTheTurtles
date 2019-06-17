@@ -7,13 +7,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Controller.Game;
+import Model.HallOfFame;
 
 public class Window extends JFrame implements ActionListener {
     private static final String ACTION_NEW_GAME = "newGame";
     private static final String ACTION_EXIT_GAME = "exitGame";
     private static final String ACTION_ABOUT = "helpAbout";
+    private static final String HALL_OF_FAME = "HallOfFame";
 
     private Game _game = null;
+    private HallOfFame hof = new HallOfFame();
+
 
     public Window(int width, int height, String title)
     {
@@ -48,7 +52,7 @@ public class Window extends JFrame implements ActionListener {
         // Setup keyboard input listener
 
         //newGame(1);
-
+        hof.createfile();
         setVisible(true);
 
     }
@@ -60,6 +64,9 @@ public class Window extends JFrame implements ActionListener {
 
         JMenu helpMenu = new JMenu("Help");
         menuBar.add(helpMenu);
+
+        JMenu HallOfFame = new JMenu("Hall Of Fame");
+        menuBar.add(HallOfFame);
 
         // File -> New game menu item
         JMenuItem newGame = new JMenuItem("new game");
@@ -76,21 +83,26 @@ public class Window extends JFrame implements ActionListener {
         about.setToolTipText("About the developers");
         about.setActionCommand(ACTION_ABOUT);
 
+
+        // Help -> About menu item
+
+        about.setToolTipText("High Scores");
+        about.setActionCommand(HALL_OF_FAME);
+
+
         fileMenu.addActionListener(this);
         helpMenu.addActionListener(this);
         newGame.addActionListener(this);
         exitGame.addActionListener(this);
         about.addActionListener(this);
-
+        HallOfFame.addActionListener(this);
         // Add the sub menu items to the file and help menu
+
         fileMenu.add(newGame);
         fileMenu.add(exitGame);
         helpMenu.add(about);
 
     }
-
-
-
 
     private void newGame() {
         _game = new Game(getWidth(),getHeight());
@@ -112,6 +124,10 @@ public class Window extends JFrame implements ActionListener {
             System.exit(0);
         } else if (action.equals(ACTION_ABOUT)) {
             System.out.println("Show about dialog");
+        }
+        else if (action.equals(HALL_OF_FAME)) {
+            System.out.println("Show Hall of Fame");
+
         }
     }
 }
