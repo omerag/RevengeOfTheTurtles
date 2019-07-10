@@ -85,5 +85,15 @@ public class ObjectsContainer {
         return blockList;
     }
 
+    public void clearContainer(){
+        player = null;
+        enemySpawner = null;
+        reflectableBullet = null;
+        enemyList.clear();
+        bulletList.clear();
+        blockList.clear();
+
+    }
+
 }
 

@@ -55,8 +55,9 @@ public class Game extends Canvas implements Runnable {
     }
 
 
-    private void stop(){
+    public void stop(){
         isRunning = false;
+        ObjectsContainer.getInstance().clearContainer();
         try {
             thread.join();
         } catch (InterruptedException e) {
@@ -101,7 +102,6 @@ public class Game extends Canvas implements Runnable {
 
             }
         }
-        stop();
     }
 
     public void tick(){
@@ -115,5 +115,7 @@ public class Game extends Canvas implements Runnable {
         imageRender.render();
     }
 
-
+    public boolean isRunning() {
+        return isRunning;
+    }
 }
