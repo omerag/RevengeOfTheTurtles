@@ -1,6 +1,10 @@
 package Controller;
 
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import Controller.MouseInput;
 import Controller.*;
@@ -22,11 +26,28 @@ public class Game extends Canvas implements Runnable {
     public int score = 0;
     public int hp = 100;
 
+     private boolean isFocused = true;
 
     public Game(int gameWidth, int gameHeight){
 
         mediator = new Mediator();
         imageRender = new ImageRender(this, mediator);
+
+        setFocusable(true);
+        addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                isFocused = true;
+                System.out.println("game focused");
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                isFocused = false;
+                System.out.println("game lost focus");
+
+            }
+        });
 
         ObjectsContainer.getInstance();
         SpriteContainer.getInstance();
@@ -42,6 +63,8 @@ public class Game extends Canvas implements Runnable {
         imageRender.loadLevel();
     }
 
+
+
     private void start(){
         isRunning = true;
         thread = new Thread(this);
@@ -55,8 +78,9 @@ public class Game extends Canvas implements Runnable {
     }
 
 
-    private void stop(){
+    public void stop(){
         isRunning = false;
+        ObjectsContainer.getInstance().clearContainer();
         try {
             thread.join();
         } catch (InterruptedException e) {
@@ -83,7 +107,7 @@ public class Game extends Canvas implements Runnable {
             delta += (now - lastTime) /ns;
             lastTime = now;
             while(delta >= 1) {
-                tick();
+                if(isFocused) tick();
                 updates++;
                 delta--;
             }
@@ -101,7 +125,6 @@ public class Game extends Canvas implements Runnable {
                 // request name for high score.
             }
         }
-        stop();
     }
 
     public void tick(){
@@ -115,5 +138,8 @@ public class Game extends Canvas implements Runnable {
         imageRender.render();
     }
 
+    public boolean isRunning() {
+        return isRunning;
+    }
 
 }

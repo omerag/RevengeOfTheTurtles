@@ -116,8 +116,26 @@ public class Window extends JFrame implements ActionListener {
 
         if (action.equals(ACTION_NEW_GAME)) {
             System.out.println("New Game");
+
+            if(_game != null){
+                System.out.println("stop old game");
+
+                if(_game.isRunning()){
+                    _game.stop();
+                }
+
+                System.out.println("remove game component");
+
+                remove(_game);
+
+                System.out.println("starting another game");
+
+            }
+
             newGame();
             _game.StartGame();
+
+
             setVisible(true);
         } else if (action.equals(ACTION_EXIT_GAME)) {
             System.out.println("Exit the game");
