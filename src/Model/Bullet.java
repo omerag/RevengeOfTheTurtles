@@ -13,6 +13,8 @@ public class Bullet extends GameObject{
     private BufferedImage bullet_image;
     private BufferedImage bullet_image2;
     private BufferedImage bullet_image3;
+    private BufferedImage bullet_image4;
+
     private int state = 1;
 
 
@@ -30,9 +32,11 @@ public class Bullet extends GameObject{
         }
 
         this.bulletType = bulletType;
-        bullet_image = SpriteContainer.getInstance().getGeneral_sheet().grabImage(1,3,16,16,32);
-        bullet_image2 = SpriteContainer.getInstance().getGeneral_sheet().grabImage(2,3,16,16,32);
-        bullet_image3 = SpriteContainer.getInstance().getGeneral_sheet().grabImage(3,3,16,16,32);
+        bullet_image = SpriteContainer.getInstance().getGeneral_sheet().grabImage(1,3,32,32,32);
+        bullet_image2 = SpriteContainer.getInstance().getGeneral_sheet().grabImage(2,3,32,32,32);
+        bullet_image3 = SpriteContainer.getInstance().getGeneral_sheet().grabImage(3,3,32,32,32);
+        bullet_image4 = SpriteContainer.getInstance().getGeneral_sheet().grabImage(3,3,32,32,32);
+
     }
 
 
@@ -52,7 +56,8 @@ public class Bullet extends GameObject{
         BufferedImage tempImage = bullet_image;
         bullet_image = bullet_image2;
         bullet_image2 = bullet_image3;
-        bullet_image3 = tempImage;
+        bullet_image3 = bullet_image4;
+        bullet_image4 = tempImage;
     }
 
     @Override
@@ -64,7 +69,7 @@ public class Bullet extends GameObject{
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x,y,16,16);
+        return new Rectangle(x,y,32,32);
     }
 
     public BulletType getBulletType() {

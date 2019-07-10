@@ -72,14 +72,6 @@ public class Player extends CharacterObject {
 
     private void collision(){
 
-        for(Enemy enemy : mediator.objectsContainer.getEnemyList()){
-            if(getBounds().intersects(enemy.getBounds())){
-                game.hp -= 3;
-                if(game.hp <= 0){
-                    //...
-                }
-            }
-        }
 
         for(Bullet bullet : mediator.objectsContainer.getBulletList()){
             if(getBounds().intersects(bullet.getBounds())){
