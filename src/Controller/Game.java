@@ -98,7 +98,7 @@ public class Game extends Canvas implements Runnable {
             //System.out.println("frames = " + frames +'\n' + "updates = " + updates);
             if(hp < 1){
                 stop();
-
+                // request name for high score.
             }
         }
         stop();
