@@ -24,6 +24,8 @@ public abstract class CharacterObject extends GameObject{
     protected final int MOVE_STAND = 17;
     protected int lastMove = MOVE_STAND;
 
+    protected boolean isStack = false;
+
 
 
     protected int counter = 20;
@@ -51,8 +53,45 @@ public abstract class CharacterObject extends GameObject{
             y += velY * 3 * -1;
             velX *= -1;
             velY *= -1;
+            isStack = true;
+        }
+
+        if(isStack){
+            reverseDicerction();
         }
     }
+
+    void reverseDicerction(){
+
+        switch (currentState){
+            case STAND_FACE_DOWN:
+            case LEFT_LEG_FACE_DOWN:
+            case RIGHT_LEG_FACE_DOWN:
+                currentState = LEFT_LEG_FACE_UP;
+                break;
+            case STAND_FACE_UP:
+            case LEFT_LEG_FACE_UP:
+            case RIGHT_LEG_FACE_UP:
+                currentState = LEFT_LEG_FACE_DOWN;
+                break;
+            case STAND_FACE_RIGHT:
+            case LEFT_LEG_FACE_RIGHT:
+            case RIGHT_LEG_FACE_RIGHT:
+                currentState = LEFT_LEG_FACE_LEFT;
+                break;
+            case STAND_FACE_LEFT:
+            case LEFT_LEG_FACE_LEFT:
+            case RIGHT_LEG_FACE_LEFT:
+                currentState = LEFT_LEG_FACE_RIGHT;
+                break;
+        }
+
+        isStack = false;
+
+
+    }
+
+
 
 
     void actionStand(){
@@ -87,6 +126,7 @@ public abstract class CharacterObject extends GameObject{
     void actionMoveRight(){
 
         velX = myVel;
+        velY = 0;
         counter--;
         if(currentState != LEFT_LEG_FACE_RIGHT && counter > resetCounter/2){
             currentState = LEFT_LEG_FACE_RIGHT;
@@ -102,6 +142,7 @@ public abstract class CharacterObject extends GameObject{
 
     void actionMoveDown(){
 
+        velX = 0;
         velY = myVel;
         counter--;
 
@@ -121,6 +162,7 @@ public abstract class CharacterObject extends GameObject{
     void actionMoveLeft(){
 
         velX = -myVel;
+        velY = 0;
         counter--;
 
         if(currentState != LEFT_LEG_FACE_LEFT && counter > resetCounter/2){
@@ -140,6 +182,7 @@ public abstract class CharacterObject extends GameObject{
 
     void actionMoveUp(){
 
+        velX = 0;
         velY = -myVel;
         counter--;
         if(currentState != LEFT_LEG_FACE_UP && counter > resetCounter/2 ){

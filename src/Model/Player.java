@@ -56,7 +56,7 @@ public class Player extends CharacterObject {
             actionMoveDown();
             isStanding = false;
         }
-        if (mediator.isRight()){
+        else if (mediator.isRight()){
             actionMoveRight();
             isStanding = false;
         }
