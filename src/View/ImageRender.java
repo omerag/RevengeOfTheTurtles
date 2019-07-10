@@ -69,15 +69,16 @@ public class ImageRender{
         objectsContainer.getEnemySpawner().render(g);
         objectsContainer.getPlayer().render(g);
 
-        g.setColor(Color.GRAY);
+        g.setColor(Color.CYAN);
         g.fillRect(5, 5, 200, 32);
-        g.setColor(Color.GREEN);
+        g.setColor(Color.RED);
         g.fillRect(5, 5, hp * 2, 32);
         g.setColor(Color.BLACK);
         g.drawRect(5, 5, 200, 32);
 
         g.setColor(Color.WHITE);
-        g.drawString("Score: " + score, 5, 50);
+        g.setFont(new Font("Courier", Font.BOLD,28));
+        g.drawString("Score: " + score, 5, 65);
 
         g.dispose();
         bs.show();

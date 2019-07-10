@@ -74,7 +74,7 @@ public class Mediator {
         if(tempX < 0) tempX = -tempX;
         if(tempY < 0) tempY = -tempY;
 
-        return tempX < 64 && tempY < 64;
+        return tempX < 128 && tempY < 128;
     }
 
     public void setFactory(Factory factory) {
