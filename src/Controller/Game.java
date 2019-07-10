@@ -96,6 +96,10 @@ public class Game extends Canvas implements Runnable {
                 updates = 0;
             }
             //System.out.println("frames = " + frames +'\n' + "updates = " + updates);
+            if(hp < 1){
+                stop();
+
+            }
         }
         stop();
     }

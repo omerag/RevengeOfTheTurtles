@@ -85,9 +85,7 @@ public abstract class CharacterObject extends GameObject{
                 currentState = LEFT_LEG_FACE_RIGHT;
                 break;
         }
-
         isStack = false;
-
 
     }
 
