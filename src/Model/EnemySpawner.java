@@ -36,23 +36,19 @@ public class EnemySpawner extends CharacterObject {
 
         if(r.nextInt(100) == 0){
             actionMoveUp();
-            velX = 0;
             lastMove = MOVE_UP;
         }
         else if(r.nextInt(100) == 0){
             actionMoveDown();
-            velX = 0;
             lastMove = MOVE_DOWN;
 
         }else if (r.nextInt(100) == 0) {
             //velX = (r.nextInt(1 - -1) + -1);
             actionMoveRight();
-            velY = 0;
             lastMove = MOVE_RIGHT;
         }
         else if(r.nextInt(100) == 0){
             actionMoveLeft();
-            velY = 0;
             lastMove = MOVE_LEFT;
         }
         else switch (lastMove){
@@ -85,7 +81,7 @@ public class EnemySpawner extends CharacterObject {
         }*/
 
 
-        if(r.nextInt(250) < level){
+        if(r.nextInt(500) < level){
             mediator.factory.newEnemy(x,y);
             if(r.nextInt(10) == 0 && level < 10){
                     level++;

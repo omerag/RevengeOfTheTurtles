@@ -59,23 +59,19 @@ public class Enemy extends CharacterObject {
 
         if(r.nextInt(100) == 0){
             actionMoveUp();
-            velX = 0;
             lastMove = MOVE_UP;
         }
         else if(r.nextInt(100) == 0){
             actionMoveDown();
-            velX = 0;
             lastMove = MOVE_DOWN;
 
         }else if (r.nextInt(100) == 0) {
             //velX = (r.nextInt(1 - -1) + -1);
             actionMoveRight();
-            velY = 0;
             lastMove = MOVE_RIGHT;
         }
         else if(r.nextInt(100) == 0){
             actionMoveLeft();
-            velY = 0;
             lastMove = MOVE_LEFT;
         }
         else switch (lastMove){
