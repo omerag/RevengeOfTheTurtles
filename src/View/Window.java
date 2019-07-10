@@ -1,12 +1,17 @@
 package View;
 
 
+import java.awt.image.*;
+import java.io.*;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Controller.Game;
+import Model.BufferImageLoader;
 import Model.HallOfFame;
 
 public class Window extends JFrame implements ActionListener {
@@ -15,6 +20,7 @@ public class Window extends JFrame implements ActionListener {
     private static final String ACTION_ABOUT = "helpAbout";
     private static final String HALL_OF_FAME = "HallOfFame";
 
+    private JPanel backpic;
     private Game _game = null;
     private HallOfFame hof = new HallOfFame();
 
@@ -25,7 +31,7 @@ public class Window extends JFrame implements ActionListener {
     }
 
     private void initUI(int width, int height, String title) {
-
+        BufferedImage image = null;
         setTitle(title);
         setPreferredSize(new Dimension(width,height));
         setMaximumSize(new Dimension(width,height));
@@ -43,6 +49,20 @@ public class Window extends JFrame implements ActionListener {
         // This will contains the menu bar
         JMenuBar menuBar = new JMenuBar();
         add(menuBar, BorderLayout.NORTH);
+        backpic = new JPanel();
+
+            BufferImageLoader loader = new BufferImageLoader();
+            //level = loader.loadImage("/wizard_level - Copy.png");
+            BufferedImage backpicture = loader.loadImage("/revengeofthepicture.png");
+
+            //image = ImageIO.read(new File("/revengeofthepicture.png"));
+
+        JLabel label = new JLabel(new ImageIcon(backpicture));
+        backpic.add(label);
+        add(backpic,BorderLayout.CENTER);
+        //backpic
+
+        //add()
 
 
         //add(mainPanel,gamepanel);
@@ -116,6 +136,11 @@ public class Window extends JFrame implements ActionListener {
 
         if (action.equals(ACTION_NEW_GAME)) {
             System.out.println("New Game");
+
+            if(backpic != null)
+            {
+                remove(backpic);
+            }
 
             if(_game != null){
                 System.out.println("stop old game");
