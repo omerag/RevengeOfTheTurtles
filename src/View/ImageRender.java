@@ -44,7 +44,7 @@ public class ImageRender{
 
         Graphics g = bs.getDrawGraphics();
 
-        for (int xx = 0; xx < 30 * 33; xx += 32) {
+        for (int xx = 0; xx < 30 * 34; xx += 32) {
             for (int yy = 0; yy < 30 * 24; yy += 32) {
                 g.getClipBounds(); //redraw only tiles that changed
                 g.drawImage(floor, xx, yy, null);

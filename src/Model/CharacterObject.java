@@ -37,9 +37,6 @@ public abstract class CharacterObject extends GameObject{
 
 
 
-
-
-
     protected List<BufferedImage> imagesList;
     public CharacterObject(int x, int y, ID id , int gameWidth, int gameHeight, List<BufferedImage> imagesList, int myVel) {
         super(x, y, id, gameWidth, gameHeight);
@@ -51,8 +48,8 @@ public abstract class CharacterObject extends GameObject{
         if (x <= 32 || x >= gameWidth - 32*3 || y < 32 || y >= gameHeight - 16*9) {
             x += velX * 3 * -1;
             y += velY * 3 * -1;
-            velX *= -1;
-            velY *= -1;
+           // velX *= -1;
+          //  velY *= -1;
             isStack = true;
         }
 
@@ -61,7 +58,7 @@ public abstract class CharacterObject extends GameObject{
         }
     }
 
-    void reverseDicerction(){
+    private void reverseDicerction(){
 
         switch (currentState){
             case STAND_FACE_DOWN:
@@ -152,7 +149,6 @@ public abstract class CharacterObject extends GameObject{
         }
         else if(counter < 0){
             counter = resetCounter;
-
         }
 
     }

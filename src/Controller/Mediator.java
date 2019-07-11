@@ -68,8 +68,8 @@ public class Mediator {
     }
 
      boolean isShootable(int xPlayer, int yPlayer,int xBullet,int yBullet){
-        int tempX = xPlayer - xBullet;
-        int tempY = yPlayer - yBullet;
+        int tempX = (xPlayer + 32) - (xBullet + 16);
+        int tempY = (yPlayer + 32) - (yBullet + 16);
 
         if(tempX < 0) tempX = -tempX;
         if(tempY < 0) tempY = -tempY;

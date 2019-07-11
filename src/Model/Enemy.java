@@ -40,8 +40,8 @@ public class Enemy extends CharacterObject {
         checkBorders();
 
 
-        xPlayer = mediator.objectsContainer.getPlayer().getX();
-        yPlayer = mediator.objectsContainer.getPlayer().getY();
+        xPlayer = mediator.objectsContainer.getPlayer().getX() + 32;
+        yPlayer = mediator.objectsContainer.getPlayer().getY() + 32;
 
 
         for (int i = 0; i < mediator.objectsContainer.getBulletList().size(); i++) {

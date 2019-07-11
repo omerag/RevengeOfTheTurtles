@@ -24,8 +24,9 @@ public class MouseInput extends MouseAdapter {
 
         if(mediator.objectsContainer.getReflectableBullet() != null &&
                 mediator.isShootable(player.getX(),player.getY(), bullet.getX(), bullet.getY())
-            && bullet.bulletType == BulletType.ENEMY){
-            mediator.factory.newFriendlyBullet(player.getX(),player.getY(),mx,my);
+                && bullet.bulletType == BulletType.ENEMY){
+
+            mediator.factory.newFriendlyBullet(bullet.getX(),bullet.getY(),mx,my);
             mediator.objectsContainer.removeBullet(bullet);
             mediator.objectsContainer.setReflectableBullet(null);
 

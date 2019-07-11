@@ -29,16 +29,6 @@ public class Player extends CharacterObject {
         y += velY;
 
         checkBorders();
-/*
-
-        if(x <= 32 || x >= gameWidth - 64 || y < 32 || y >= gameHeight - 118){
-            x += velX* -1;
-            y += velY* -1;
-            velX *= -1;
-            velY *= -1 ;
-        }
-*/
-
 
         try{
             collision();
@@ -64,17 +54,19 @@ public class Player extends CharacterObject {
             actionMoveLeft();
             isStanding = false;
         }
-        if(isStanding) {
+        else if(isStanding) {
             actionStand();
         }
-        isStanding = true;
+        else {
+            isStanding = true;
+        }
     }
 
     private void collision(){
 
 
         for(Bullet bullet : mediator.objectsContainer.getBulletList()){
-            if(getBounds().intersects(bullet.getBounds())){
+            if(bullet.bulletType == BulletType.ENEMY && getBounds().intersects(bullet.getBounds())){
                 game.hp -= 1;
                 if(game.hp <= 0){
                     //...

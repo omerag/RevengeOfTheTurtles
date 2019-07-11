@@ -22,8 +22,8 @@ public class Bullet extends GameObject{
         super(x, y, id,gameWidth,gameHeight);
         this.mediator = mediator;
         if(bulletType ==BulletType.PLAYER){
-            velX = (mx - x)*0.05f;
-            velY = (my - y)*0.05f;
+            velX = (mx - x)*0.016f;
+            velY = (my - y)*0.016f;
         }
         else{
 
@@ -69,7 +69,7 @@ public class Bullet extends GameObject{
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x,y,32,32);
+        return new Rectangle(x,y,16,16);
     }
 
     public BulletType getBulletType() {
