@@ -8,9 +8,7 @@ import java.awt.event.MouseListener;
 
 import Controller.MouseInput;
 import Controller.*;
-import Model.Factory;
-import Model.ObjectsContainer;
-import Model.SpriteContainer;
+import Model.*;
 import View.ImageRender;
 
 
@@ -26,7 +24,14 @@ public class Game extends Canvas implements Runnable {
     public int score = 0;
     public int hp = 100;
 
-     private boolean isFocused = true;
+    private boolean isFocused = true;
+
+    // Constructor
+    public void SoundContainer() {
+        // Pre-load all the sound files
+        SoundContainer.init();
+        SoundContainer.volume = SoundContainer.Volume.LOW;
+    }
 
     public Game(int gameWidth, int gameHeight){
 
@@ -63,12 +68,11 @@ public class Game extends Canvas implements Runnable {
         imageRender.loadLevel();
     }
 
-
-
     private void start(){
         isRunning = true;
         thread = new Thread(this);
         thread.start();
+        //SoundContainer.THEME.play();
     }
 
     public void StartGame()

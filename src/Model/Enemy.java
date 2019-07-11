@@ -48,6 +48,7 @@ public class Enemy extends CharacterObject {
             Bullet bullet = mediator.objectsContainer.getBulletList().get(i);
             if (getBounds().intersects(bullet.getBounds()) &&
                     bullet.getBulletType() == BulletType.PLAYER) {
+                SoundContainer.SQUISH.play();
                 mediator.objectsContainer.removeBullet(bullet);
                 mediator.objectsContainer.removeEnemy(this);
                 game.score++;

@@ -67,6 +67,7 @@ public class Player extends CharacterObject {
 
         for(Bullet bullet : mediator.objectsContainer.getBulletList()){
             if(bullet.bulletType == BulletType.ENEMY && getBounds().intersects(bullet.getBounds())){
+                SoundContainer.INJURED.play();
                 game.hp -= 1;
                 if(game.hp <= 0){
                     //...
