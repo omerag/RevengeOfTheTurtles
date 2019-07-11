@@ -72,7 +72,7 @@ public class Game extends Canvas implements Runnable {
         isRunning = true;
         thread = new Thread(this);
         thread.start();
-        //SoundContainer.THEME.play();
+        SoundContainer.THEME.play();
     }
 
     public void StartGame()
