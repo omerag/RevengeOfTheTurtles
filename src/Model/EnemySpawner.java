@@ -81,9 +81,9 @@ public class EnemySpawner extends CharacterObject {
         }*/
 
 
-        if(r.nextInt(280) < level){
+        if(r.nextInt(280) < level && mediator.objectsContainer.getEnemyList().size() < 50){
             mediator.factory.newEnemy(x,y);
-            if(r.nextInt(10) == 0 && level < 10){
+            if(r.nextInt(10 + level*5) == 0 && level < 10){
                     level++;
                 System.out.println("level = " + level);
             }

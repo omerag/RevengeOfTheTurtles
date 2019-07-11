@@ -42,7 +42,7 @@ class MediatorTest extends TestCase {
 
         assertTrue(tempX < 128 && tempY < 128);
 
-        //
+        //out of rang both x y
         xPlayer = 128 + 32;
         yPlayer = 128 + 32;
         xBullet = 0 + 32;
@@ -56,7 +56,8 @@ class MediatorTest extends TestCase {
 
         assertFalse(tempX < 128 && tempY < 128);
 
-        xPlayer = 127 + 32;
+        //only x out of rang, y is ok
+        xPlayer = 128 + 32;
         yPlayer = 127 + 32;
         xBullet = 0 + 32;
         yBullet = 0 + 32;
@@ -67,25 +68,13 @@ class MediatorTest extends TestCase {
         if(tempX < 0) tempX = -tempX;
         if(tempY < 0) tempY = -tempY;
 
-        assertTrue(tempX < 128 && tempY < 128);
+        assertFalse(tempX < 128 && tempY < 128);
 
 
+        //x is ok, only y is out of rang
         xPlayer = 0 + 32;
         yPlayer = 0 + 32;
         xBullet = 127 + 32;
-        yBullet = 127 + 32;
-
-        tempX = xPlayer - xBullet;
-        tempY = yPlayer - yBullet;
-
-        if(tempX < 0) tempX = -tempX;
-        if(tempY < 0) tempY = -tempY;
-
-        assertTrue(tempX < 128 && tempY < 128);
-
-        xPlayer = 0 + 32;
-        yPlayer = 0 + 32;
-        xBullet = 128 + 32;
         yBullet = 128 + 32;
 
         tempX = xPlayer - xBullet;
@@ -95,6 +84,7 @@ class MediatorTest extends TestCase {
         if(tempY < 0) tempY = -tempY;
 
         assertFalse(tempX < 128 && tempY < 128);
+
 
     }
 }
