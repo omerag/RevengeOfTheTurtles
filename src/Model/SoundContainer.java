@@ -34,11 +34,7 @@ public enum SoundContainer {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
-            if (soundFileName.equals("/res/theme_song.wav"))
-            {
-                System.out.println("themesong");
-                loop = true;
-            }
+            if (soundFileName.equals("/res/theme_song.wav")) loop = true;
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
