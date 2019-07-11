@@ -12,8 +12,9 @@ public class ImageRender{
 
     private Mediator mediator;
     private Game game;
-    private int hp;
+    private int playerHP;
     private int score;
+    private int snorlaxHP = 100;
 
 
     private SpriteSheet ss;
@@ -69,16 +70,34 @@ public class ImageRender{
         objectsContainer.getEnemySpawner().render(g);
         objectsContainer.getPlayer().render(g);
 
+
+        //player's health bar
         g.setColor(Color.CYAN);
         g.fillRect(5, 5, 200, 32);
         g.setColor(Color.RED);
-        g.fillRect(5, 5, hp * 2, 32);
+        g.fillRect(5, 5, playerHP * 2, 32);
         g.setColor(Color.BLACK);
         g.drawRect(5, 5, 200, 32);
 
+        //player's score
         g.setColor(Color.WHITE);
         g.setFont(new Font("Courier", Font.BOLD,28));
         g.drawString("Score: " + score, 5, 65);
+
+
+        //snorlax's health bar
+        g.setColor(Color.CYAN);
+        g.fillRect(820, 5, 200, 32);
+        g.setColor(Color.RED);
+        g.fillRect(820, 5, snorlaxHP * 2, 32);
+        g.setColor(Color.BLACK);
+        g.drawRect(820, 5, 200, 32);
+
+        //player's score
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Courier", Font.BOLD,28));
+        g.drawString("Snorlax", 820, 65);
+
 
         g.dispose();
         bs.show();
@@ -118,12 +137,15 @@ public class ImageRender{
         return ss;
     }
 
-    public void setHp(int hp) {
-        this.hp = hp;
+    public void setPlayerHP(int playerHP) {
+        this.playerHP = playerHP;
     }
 
     public void setScore(int score) {
         this.score = score;
     }
 
+    public void setSnorlaxHP(int snorlaxHP) {
+        this.snorlaxHP = snorlaxHP;
+    }
 }

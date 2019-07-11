@@ -3,11 +3,7 @@ package Controller;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-import Controller.MouseInput;
-import Controller.*;
 import Model.*;
 import View.ImageRender;
 
@@ -22,7 +18,9 @@ public class Game extends Canvas implements Runnable {
     private ImageRender imageRender;
 
     public int score = 0;
-    public int hp = 100;
+    public int playerHP = 100;
+    public int snorlaxHP = 100;
+
 
     private boolean isFocused = true;
 
@@ -124,7 +122,7 @@ public class Game extends Canvas implements Runnable {
                 updates = 0;
             }
             //System.out.println("frames = " + frames +'\n' + "updates = " + updates);
-            if(hp < 1){
+            if(playerHP < 1 || snorlaxHP < 1){
                 stop();
                 // request name for high score.
             }
@@ -134,8 +132,9 @@ public class Game extends Canvas implements Runnable {
     public void tick(){
 
         mediator.tick();
-        imageRender.setHp(hp);
+        imageRender.setPlayerHP(playerHP);
         imageRender.setScore(score);
+        imageRender.setSnorlaxHP(snorlaxHP);
     }
 
     public void render(){

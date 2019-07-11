@@ -5,15 +5,16 @@ import Controller.Mediator;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.List;
 import java.util.Random;
 
 public class EnemySpawner extends CharacterObject {
 
     private Mediator mediator;
-    Random r = new Random();
-    int level = 1;
+    private Random r = new Random();
+    private int level = 1;
     private BufferedImage enemy_image;
-    Game game;
+    private Game game;
 
 
 
@@ -33,7 +34,17 @@ public class EnemySpawner extends CharacterObject {
 
         checkBorders();
 
+        List<Bullet> bulltetList = mediator.objectsContainer.getBulletList();
+        for(int i = 0; i <bulltetList.size();i++ ){
+            Bullet bullet = bulltetList.get(i);
+            if(bullet.bulletType == BulletType.PLAYER && bullet.getBounds().intersects(getBounds())){
+                game.snorlaxHP--;
+                bulltetList.remove(i);
+                break;
+            }
+        }
 
+        //randomly change the direction of enemySpawner movement
         if(r.nextInt(100) == 0){
             actionMoveUp();
             lastMove = MOVE_UP;
@@ -62,27 +73,12 @@ public class EnemySpawner extends CharacterObject {
                     break;
             }
 
-/*        if(x <= 32 || x >= gameWidth - 64 || y < 32 || y >= gameHeight - 118){
-                x += velX*5 * -1;
-                y += velY*5 * -1;
-                velX *= -1;
-                velY *= -1 ;
-        }
 
-        if(r.nextInt(100) == 0) {
-            velX = (r.nextInt(4 - -4) + -4);
-            velY = 0;
-
-        }*/
-
-/*        else if (r.nextInt(100) == 0) {
-            velY = (r.nextInt(4 - -4) + -4);
-            velX = 0;
-        }*/
-
-
+        //create new enemies
         if(r.nextInt(280) < level && mediator.objectsContainer.getEnemyList().size() < 50){
             mediator.factory.newEnemy(x,y);
+
+            //increase chance of creating new enemies
             if(r.nextInt(10 + level*5) == 0 && level < 10){
                     level++;
                 System.out.println("level = " + level);
@@ -100,10 +96,6 @@ public class EnemySpawner extends CharacterObject {
     public Rectangle getBounds() {
         return new Rectangle(x,y,64,64);
 
-    }
-
-    public Rectangle getBoundsBig() {
-        return new Rectangle(x-16,y-16,64,64);
     }
 
 }

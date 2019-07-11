@@ -30,20 +30,14 @@ public class Enemy extends CharacterObject {
         y += velY;
 
 
-/*        if (x <= 32 || x >= gameWidth - 64 || y < 32 || y >= gameHeight - 96) {
-            x += velX * 3 * -1;
-            y += velY * 3 * -1;
-            velX *= -1;
-            velY *= -1;
-        }*/
-
         checkBorders();
 
-
+        //getting play's position to aim at him
         xPlayer = mediator.objectsContainer.getPlayer().getX() + 32;
         yPlayer = mediator.objectsContainer.getPlayer().getY() + 32;
 
 
+        //checking if this enemy got hit by one of the player bullets
         for (int i = 0; i < mediator.objectsContainer.getBulletList().size(); i++) {
             Bullet bullet = mediator.objectsContainer.getBulletList().get(i);
             if (getBounds().intersects(bullet.getBounds()) &&
@@ -57,7 +51,7 @@ public class Enemy extends CharacterObject {
         }
 
 
-
+        //randomly change the direction of the enemy movement
         if(r.nextInt(100) == 0){
             actionMoveUp();
             lastMove = MOVE_UP;
@@ -86,10 +80,9 @@ public class Enemy extends CharacterObject {
                     break;
             }
 
-
+        //shoot bullets
         if(r.nextInt(200) == 0){
             mediator.factory.newEnemyBullet(x,y,xPlayer,yPlayer);
-
         }
 
     }
@@ -104,9 +97,5 @@ public class Enemy extends CharacterObject {
     @Override
     public Rectangle getBounds() {
         return new Rectangle(x,y,64,64);
-    }
-
-    public Rectangle getBoundsBig() {
-        return new Rectangle(x-16,y-16,64,64);
     }
 }
