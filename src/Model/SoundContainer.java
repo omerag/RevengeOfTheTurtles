@@ -25,6 +25,7 @@ public enum SoundContainer {
     public static Volume volume = Volume.LOW;
 
     private Clip clip;
+    private boolean loop = false;
 
     SoundContainer(String soundFileName) {
         try {
@@ -33,6 +34,11 @@ public enum SoundContainer {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
+            if (soundFileName.equals("/res/theme_song.wav"))
+            {
+                System.out.println("themesong");
+                loop = true;
+            }
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -47,6 +53,7 @@ public enum SoundContainer {
             if (clip.isRunning())
                 clip.stop();
             clip.setFramePosition(0);
+            if (loop) clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
         }
     }
