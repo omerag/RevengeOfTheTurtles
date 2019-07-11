@@ -64,22 +64,22 @@ public abstract class CharacterObject extends GameObject{
             case STAND_FACE_DOWN:
             case LEFT_LEG_FACE_DOWN:
             case RIGHT_LEG_FACE_DOWN:
-                currentState = LEFT_LEG_FACE_UP;
+                lastMove = MOVE_UP;
                 break;
             case STAND_FACE_UP:
             case LEFT_LEG_FACE_UP:
             case RIGHT_LEG_FACE_UP:
-                currentState = LEFT_LEG_FACE_DOWN;
+                lastMove = MOVE_DOWN;
                 break;
             case STAND_FACE_RIGHT:
             case LEFT_LEG_FACE_RIGHT:
             case RIGHT_LEG_FACE_RIGHT:
-                currentState = LEFT_LEG_FACE_LEFT;
+                lastMove = MOVE_LEFT;
                 break;
             case STAND_FACE_LEFT:
             case LEFT_LEG_FACE_LEFT:
             case RIGHT_LEG_FACE_LEFT:
-                currentState = LEFT_LEG_FACE_RIGHT;
+                lastMove = MOVE_RIGHT;
                 break;
         }
         isStack = false;
