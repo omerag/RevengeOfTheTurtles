@@ -63,7 +63,7 @@ public class Player extends CharacterObject {
     }
 
     private void collision(){
-
+        //check is player got hit by an enemy's bullet
         List<Bullet> bulletList = mediator.objectsContainer.getBulletList();
         for(int i = 0;i < bulletList.size(); i++ ){
             Bullet bullet = bulletList.get(i);
