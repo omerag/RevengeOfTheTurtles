@@ -3,14 +3,14 @@ package Model;
 import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class fruitsoflife extends GameObject {
+public class FruitsOfLife extends GameObject {
 
     private long time = System.currentTimeMillis();
     private int positionX;
     private int positionY;
 
 
-    public fruitsoflife(int x, int y, ID id, int gameWidth, int gameHeight) {
+    public FruitsOfLife(int x, int y, ID id, int gameWidth, int gameHeight) {
         super(x, y, id, gameWidth, gameHeight);
     }
 
