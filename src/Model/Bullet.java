@@ -8,14 +8,11 @@ import java.awt.image.BufferedImage;
 public class Bullet extends GameObject{
 
     private Mediator mediator;
-    //int mx, my;
     public BulletType bulletType;
     private BufferedImage bullet_image;
     private BufferedImage bullet_image2;
     private BufferedImage bullet_image3;
     private BufferedImage bullet_image4;
-
-    private int state = 1;
 
 
     public Bullet(int x, int y, ID id, Mediator mediator, int mx, int my, BulletType bulletType, int gameWidth, int gameHeight) {

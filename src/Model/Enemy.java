@@ -12,7 +12,6 @@ public class Enemy extends CharacterObject {
     private Mediator mediator;
     private Random r = new Random();
     private int xPlayer = 0, yPlayer = 0;
-    private BufferedImage enemy_image;
     private Game game;
     private int isStuck = 60;
 

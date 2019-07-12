@@ -11,7 +11,6 @@ public class Player extends CharacterObject {
 
     private Mediator mediator;
     private Game game;
-    private BufferedImage player_image;
     private boolean isStanding = true;
 
     public Player(int x, int y, ID id, Mediator mediator, Game game, int gameWidth, int gameHeight) {
