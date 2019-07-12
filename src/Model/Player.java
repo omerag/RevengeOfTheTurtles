@@ -5,6 +5,7 @@ import Controller.Mediator;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 public class Player extends CharacterObject {
 
@@ -63,14 +64,14 @@ public class Player extends CharacterObject {
 
     private void collision(){
 
-
-        for(Bullet bullet : mediator.objectsContainer.getBulletList()){
+        List<Bullet> bulletList = mediator.objectsContainer.getBulletList();
+        for(int i = 0;i < bulletList.size(); i++ ){
+            Bullet bullet = bulletList.get(i);
             if(bullet.bulletType == BulletType.ENEMY && getBounds().intersects(bullet.getBounds())){
                 SoundContainer.INJURED.play();
-                game.playerHP -= 1;
-                if(game.playerHP <= 0){
-                    //...
-                }
+                bulletList.remove(i);
+                game.playerHP -= 25;
+                break;
             }
         }
 
