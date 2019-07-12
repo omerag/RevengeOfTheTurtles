@@ -14,7 +14,7 @@ public class Game extends Canvas implements Runnable {
     private boolean isRunning = false;
     private Thread thread;
     private Mediator mediator;
-
+    private HOFController hofc;
     private ImageRender imageRender;
 
     public int score = 0;
@@ -35,7 +35,7 @@ public class Game extends Canvas implements Runnable {
 
         mediator = new Mediator();
         imageRender = new ImageRender(this, mediator);
-
+        hofc = new HOFController();
         setFocusable(true);
         addFocusListener(new FocusListener() {
             @Override
@@ -84,6 +84,12 @@ public class Game extends Canvas implements Runnable {
         isRunning = false;
         ObjectsContainer.getInstance().clearContainer();
         try {
+
+
+            if(playerHP < 1 || snorlaxHP < 1) {
+                hofc.checkifhighscore(Integer.toString(score));
+            }
+
             thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -125,6 +131,9 @@ public class Game extends Canvas implements Runnable {
             if(playerHP < 1 || snorlaxHP < 1){
                 stop();
                 // request name for high score.
+
+
+
             }
         }
     }

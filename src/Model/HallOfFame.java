@@ -4,6 +4,7 @@ import com.sun.xml.internal.bind.v2.runtime.Name;
 import java.io.*;
 import java.io.FileReader;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class HallOfFame
@@ -50,13 +51,19 @@ public class HallOfFame
     }
 
 
-    public void CheckLocation(String name,String score,String date)
+    public void CheckLocation(String score,String name)
     {
 
+        boolean flag = false;
         char [] a = new char[100];
         String[] lines;
+
         String[] details;
         try {
+
+            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+            Date date = new Date(System.currentTimeMillis());
+
             FileReader fr = new FileReader(FILE_NAME);
             StringBuffer stringBuffer = new StringBuffer();
             int numCharsRead;
@@ -67,12 +74,25 @@ public class HallOfFame
             fr.close();
             lines = stringBuffer.toString().split("\n");
 
-            for(String line : lines)
+            for(int i=1;i<lines.length;i++)
             {
-                details = line.split(",");
-                if(Integer.parseInt(details[2]) < Integer.parseInt(score) || details[2] == " ")
+                details = lines[i].split(",");
+                if(details[2].equals("0") ) {
+                    flag = true;
+                }
+                else
                 {
-                    UpdateFile(Integer.parseInt(details[0]),name,score,date,lines);
+                    if(Integer.parseInt(details[2]) <= Integer.parseInt(score))
+                    {
+                        flag = true;
+                    }
+
+                }
+
+                if(flag)
+                {
+                    UpdateFile(i,name,score,formatter.format(date),lines);
+                    break;
                 }
             }
 
@@ -91,7 +111,7 @@ public class HallOfFame
         String[] recordarray;
 
 
-        for(int i=0;i<lines.length;i++)
+        for(int i=1;i<lines.length;i++)
         {
             recordarray = lines[i].split(",");
             records.add(new Record(recordarray[1],recordarray[2],recordarray[3]));
@@ -102,7 +122,7 @@ public class HallOfFame
 
         Comparator<Record> compareByScore = (Record r1, Record r2) -> r1.getScore().compareTo( r2.getScore() );
 
-        Collections.sort(records,compareByScore);
+        Collections.sort(records,compareByScore.reversed());
 
 
         try {
@@ -132,7 +152,16 @@ public class HallOfFame
                 oFile.append(rec.getDate());
                 oFile.append(',');
                 oFile.append('\n');
+
+                if(i==10)
+                {
+                    break;
+                }
+                i++;
             }
+            oFile.flush();
+            oFile.close();
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -169,7 +198,7 @@ public class HallOfFame
                     oFile.append(',');
                     for(int j=1;j<4;j++)
                     {
-                        oFile.append(" ");
+                        oFile.append("0");
                         oFile.append(',');
                     }
 
@@ -186,6 +215,7 @@ public class HallOfFame
         }
 
     }
+
 
 
 

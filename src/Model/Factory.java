@@ -57,5 +57,8 @@ public class Factory {
         objectsContainer.addBullet(bullet);
         return bullet;
     }
+
+
+
 }
 

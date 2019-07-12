@@ -14,11 +14,13 @@ public class SpriteContainer {
     private BufferedImage panda_sheet = loader.loadImage("/pandaspritesheet.png");
     private BufferedImage snorlax_sheet = loader.loadImage("/snorlaxspritesheet.png");
     private BufferedImage general_sheet = loader.loadImage("/sprite_sheet.png");
+    private BufferedImage Fruits_sheet =  loader.loadImage("/fruitspritesheet.png");
 
 
     private List<BufferedImage>tzavSprites = new ArrayList<>();
     private List<BufferedImage>pandaSprites = new ArrayList<>();
     private List<BufferedImage>snorlaxSprites = new ArrayList<>();
+    private List<BufferedImage>fruitsSprites = new ArrayList<>();
 
     /*
     0 - stand - face down
@@ -39,7 +41,7 @@ public class SpriteContainer {
         spriteLoader(pandaSprites,panda_sheet,false);
         spriteLoader(snorlaxSprites,snorlax_sheet,true);
         spriteLoader(tzavSprites,tzav_sheet,true);
-
+        FruitsLoader(fruitsSprites,Fruits_sheet);
     }
 
     public static SpriteContainer getInstance(){
@@ -61,8 +63,20 @@ public class SpriteContainer {
         return snorlaxSprites;
     }
 
+
+    public List<BufferedImage> getFruitsSprites(){ return fruitsSprites;};
+
     public SpriteSheet getGeneral_sheet() {
         return new SpriteSheet(general_sheet);
+    }
+
+    private void FruitsLoader(List<BufferedImage> fruitsprite ,BufferedImage bufferedImage)
+    {
+        SpriteSheet spriteSheet = new SpriteSheet(bufferedImage);
+        for(int i = 1; i < 5; i++){
+            fruitsprite.add(spriteSheet.grabImage(i, 1, 32, 32,32));
+        }
+
     }
 
     private void spriteLoader(List<BufferedImage> objectSprite, BufferedImage bufferedImage , boolean hasSpecialMove){

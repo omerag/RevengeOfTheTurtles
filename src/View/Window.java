@@ -9,10 +9,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import Controller.Game;
+import Controller.HOFController;
 import Model.BufferImageLoader;
 import Model.HallOfFame;
+import Model.Record;
+import com.sun.istack.internal.localization.NullLocalizable;
 
 public class Window extends JFrame implements ActionListener {
     private static final String ACTION_NEW_GAME = "newGame";
@@ -20,13 +24,18 @@ public class Window extends JFrame implements ActionListener {
     private static final String ACTION_ABOUT = "helpAbout";
     private static final String HALL_OF_FAME = "HallOfFame";
 
+    private int width;
+    private int height;
     private JPanel backpic;
+    private JPanel HOFPanel;
     private Game _game = null;
-    private HallOfFame hof = new HallOfFame();
-
+    private HOFController hofc = new HOFController();
+    private ArrayList<Record> scoreslist;
 
     public Window(int width, int height, String title)
     {
+        this.width = width;
+        this.height = height;
         initUI(width,height,title);
     }
 
@@ -58,6 +67,7 @@ public class Window extends JFrame implements ActionListener {
             //image = ImageIO.read(new File("/revengeofthepicture.png"));
 
         JLabel label = new JLabel(new ImageIcon(backpicture));
+
         backpic.add(label);
         add(backpic,BorderLayout.CENTER);
         //backpic
@@ -72,7 +82,7 @@ public class Window extends JFrame implements ActionListener {
         // Setup keyboard input listener
 
         //newGame(1);
-        hof.createfile();
+        hofc.CreateHOFfile();
         setVisible(true);
 
     }
@@ -85,8 +95,8 @@ public class Window extends JFrame implements ActionListener {
         JMenu helpMenu = new JMenu("Help");
         menuBar.add(helpMenu);
 
-        JMenu HallOfFame = new JMenu("Hall Of Fame");
-        menuBar.add(HallOfFame);
+        JMenuItem HallOfFame = new JMenuItem("Hall Of Fame");
+        HallOfFame.setActionCommand(HALL_OF_FAME);
 
         // File -> New game menu item
         JMenuItem newGame = new JMenuItem("new game");
@@ -106,9 +116,6 @@ public class Window extends JFrame implements ActionListener {
 
         // Help -> About menu item
 
-        about.setToolTipText("High Scores");
-        about.setActionCommand(HALL_OF_FAME);
-
 
         fileMenu.addActionListener(this);
         helpMenu.addActionListener(this);
@@ -119,8 +126,10 @@ public class Window extends JFrame implements ActionListener {
         // Add the sub menu items to the file and help menu
 
         fileMenu.add(newGame);
+        fileMenu.add(HallOfFame);
         fileMenu.add(exitGame);
         helpMenu.add(about);
+
 
     }
 
@@ -129,14 +138,26 @@ public class Window extends JFrame implements ActionListener {
         add(_game,BorderLayout.CENTER);
     }
 
+    public void GetPlayerNameDisplay()
+    {
+        JFrame playernameF = new JFrame();
+        playernameF.setVisible(true);
+
+
+    }
 
     public void actionPerformed(ActionEvent e)
     {
+        int loc = 0;
         String action = e.getActionCommand();
 
         if (action.equals(ACTION_NEW_GAME)) {
             System.out.println("New Game");
 
+            if(HOFPanel != null)
+            {
+                remove(HOFPanel);
+            }
             if(backpic != null)
             {
                 remove(backpic);
@@ -170,6 +191,66 @@ public class Window extends JFrame implements ActionListener {
         }
         else if (action.equals(HALL_OF_FAME)) {
             System.out.println("Show Hall of Fame");
+            if(backpic != null)
+            {
+                remove(backpic);
+            }
+
+            if(_game != null){
+                System.out.println("stop old game");
+
+                if(_game.isRunning()){
+                    _game.stop();
+                }
+
+                System.out.println("remove game component");
+
+                remove(_game);
+
+            }
+
+            if(HOFPanel != null)
+            {
+                remove(HOFPanel);
+            }
+
+            HOFPanel = new JPanel();
+            JTextArea scores = new JTextArea();
+            scoreslist = hofc.getScores();
+
+            StringBuilder sb = new StringBuilder();
+            for (Record i : scoreslist) {
+                if(loc==0)
+                {
+                    sb.append("Rank" +"\t"+ i.getName() + "\t" + i.getScore() + "\t\t" + i.getDate() + "\n\n");
+
+                }
+                else
+                {
+                    sb.append(loc + "\t" + i.getName() + "\t" + i.getScore() + "\t" + i.getDate() + "\n\n");
+                }
+
+                if(loc==10)
+                {
+                    break;
+                }
+                loc++;
+
+        }
+            scores.setText(sb.toString());
+            Font font = new Font("Verdana", Font.BOLD, 22);
+            scores.setFont(font);
+            scores.setForeground(Color.LIGHT_GRAY);
+            loc = 0;
+            scores.setPreferredSize(new Dimension(width,height));
+            scores.setMaximumSize(new Dimension(width,height));
+            scores.setMinimumSize(new Dimension(width,height));
+            HOFPanel.add(scores);
+            add(HOFPanel,BorderLayout.CENTER);
+
+            pack();
+            setVisible(true);
+            pack();
 
         }
     }
