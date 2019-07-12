@@ -12,10 +12,11 @@ public class Mediator {
 
     public void tick(){
 
-
+        //activating  tick method of bullet objects
         for(int i = 0; i < objectsContainer.getBulletList().size(); i++){
             Bullet bullet = objectsContainer.getBulletList().get(i);
 
+            //check if an enemy's bullet can be reflectable
             if(isShootable(objectsContainer.getPlayer().getX(), objectsContainer.getPlayer().getY(),
                     bullet.getX(),bullet.getY()) && bullet.bulletType == BulletType.ENEMY){
                 objectsContainer.setReflectableBullet(bullet);
@@ -24,13 +25,16 @@ public class Mediator {
             bullet.tick();
         }
 
+        //activating tick method of enemy objects
         for (int i = 0; i < objectsContainer.getEnemyList().size(); i++) {
             Enemy enemy = objectsContainer.getEnemyList().get(i);
             enemy.tick();
         }
 
+        //activating tick method of enemySpawner object
         objectsContainer.getEnemySpawner().tick();
 
+        //activating tick method of player object
         objectsContainer.getPlayer().tick();
 
     }

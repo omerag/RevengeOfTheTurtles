@@ -20,12 +20,13 @@ public class Enemy extends CharacterObject {
         super(x, y, id ,gameWidth, gameHeight,SpriteContainer.getInstance().getTzavSprites(),1);
         this.mediator = mediator;
         this.game = game;
-        enemy_image = SpriteContainer.getInstance().getGeneral_sheet().grabImage(7,2,32,32,32);
 
     }
 
     @Override
     public void tick() {
+
+        //update x y position
         x += velX;
         y += velY;
 

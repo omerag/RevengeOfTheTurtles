@@ -17,7 +17,6 @@ public class Player extends CharacterObject {
         super(x, y, id,gameWidth,gameHeight,SpriteContainer.getInstance().getPandaSprites(),3);
         this.mediator = mediator;
         this.game = game;
-        player_image = SpriteContainer.getInstance().getGeneral_sheet().grabImage(7,1,32,32,32);
 
     }
 

@@ -13,7 +13,6 @@ public class EnemySpawner extends CharacterObject {
     private Mediator mediator;
     private Random r = new Random();
     private int level = 1;
-    private BufferedImage enemy_image;
     private Game game;
 
 
@@ -22,24 +21,25 @@ public class EnemySpawner extends CharacterObject {
         super(x, y, id,gameWidth, gameHeight,SpriteContainer.getInstance().getSnorlaxSprites(),2);
         this.mediator = mediator;
         this.game = game;
-        enemy_image = SpriteContainer.getInstance().getGeneral_sheet().grabImage(6,1,32,32,32);
 
     }
 
     @Override
     public void tick() {
 
+        //update x y position
         x += velX;
         y += velY;
 
         checkBorders();
 
-        List<Bullet> bulltetList = mediator.objectsContainer.getBulletList();
-        for(int i = 0; i <bulltetList.size();i++ ){
-            Bullet bullet = bulltetList.get(i);
+        //check if got hit by a player's bullet
+        List<Bullet> bulletList = mediator.objectsContainer.getBulletList();
+        for(int i = 0; i <bulletList.size();i++ ){
+            Bullet bullet = bulletList.get(i);
             if(bullet.bulletType == BulletType.PLAYER && bullet.getBounds().intersects(getBounds())){
                 game.snorlaxHP--;
-                bulltetList.remove(i);
+                bulletList.remove(i);
                 break;
             }
         }
