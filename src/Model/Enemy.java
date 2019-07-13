@@ -82,7 +82,7 @@ public class Enemy extends CharacterObject {
 
         //shoot bullets
         if(r.nextInt(200) == 0){
-            mediator.getFactory().createGameObject("ENEMY BULLET",x,y,xPlayer,yPlayer);
+            mediator.getFactory().createGameObject("ENEMY BULLET",x + 32,y + 32,xPlayer + 32,yPlayer + 32);
         }
 
     }

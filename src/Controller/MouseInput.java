@@ -61,7 +61,7 @@ public class MouseInput extends MouseAdapter {
 
             }
 
-            mediator.getFactory().createGameObject("PLAYER BULLET",bullet.getX(),bullet.getY(),mx,my);
+            mediator.getFactory().createGameObject("PLAYER BULLET",bullet.getX(),bullet.getY(),mx + 16,my + 16);
             mediator.getObjectsContainer().removeBullet(bullet);
             mediator.getObjectsContainer().setReflectableBullet(null);
 
