@@ -32,6 +32,7 @@ public class FruitOfLife extends GameObject {
     }
 
 
+
     private int GetRandom(int min,int max)
     {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
@@ -42,8 +43,8 @@ public class FruitOfLife extends GameObject {
         return this.CreationTime;
     }
 
-    @Override
     public Rectangle getBounds() {
-        return null;
+        return new Rectangle(x,y,32,32);
     }
+
 }

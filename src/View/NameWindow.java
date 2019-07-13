@@ -25,13 +25,13 @@ public class NameWindow extends JFrame implements ActionListener {
         setMinimumSize(new Dimension(width,height));
 
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         setLayout(new BorderLayout());
         setLocationRelativeTo(getRootPane());
         JPanel namepanel = new JPanel();
-         tfd1 = new JTextField("Enter Name",20);
+         tfd1 = new JTextField("",20);
         JButton jbt = new JButton("Enter");
         jbt.setActionCommand(GET_NAME);
         jbt.addActionListener(this);

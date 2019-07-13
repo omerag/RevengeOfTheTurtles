@@ -64,6 +64,7 @@ public class Player extends CharacterObject {
     private void collision(){
         //check is player got hit by an enemy's bullet
         List<Bullet> bulletList = mediator.getObjectsContainer().getBulletList();
+        FruitOfLife fruit = mediator.getObjectsContainer().getFruit();
         for(int i = 0;i < bulletList.size(); i++ ){
             Bullet bullet = bulletList.get(i);
             if(bullet.bulletType == BulletType.ENEMY && getBounds().intersects(bullet.getBounds())){
@@ -72,6 +73,13 @@ public class Player extends CharacterObject {
                 game.setPlayerHP(game.getPlayerHP() - 25);
                 break;
             }
+        }
+        if(getBounds().intersects(fruit.getBounds())){
+            SoundContainer.INJURED.play();
+            mediator.getObjectsContainer().RemoveFruit();
+            SoundContainer.EAT.play();
+            game.setPlayerHP(game.getPlayerHP() + 15);
+
         }
 
     }
