@@ -37,6 +37,8 @@ public class Mediator {
         //activating tick method of player object
         objectsContainer.getPlayer().tick();
 
+      //  objectsContainer.getFruit().tick();
+
     }
 
     public boolean isUp() {

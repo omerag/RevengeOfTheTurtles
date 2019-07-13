@@ -14,7 +14,7 @@ public class ObjectsContainer {
     private List<Enemy> enemyList = Collections.synchronizedList(new ArrayList<Enemy>());
     private List<Bullet> bulletList = Collections.synchronizedList(new ArrayList<Bullet>());
     private List<Block> blockList = Collections.synchronizedList(new ArrayList<Block>());
-
+    private FruitOfLife Fruit = null;
 
     private ObjectsContainer(){
         //nothing...
@@ -85,6 +85,12 @@ public class ObjectsContainer {
         return blockList;
     }
 
+    public void addFruit (FruitOfLife _fruit) {Fruit = _fruit;}
+
+    public FruitOfLife getFruit() {
+        return Fruit;
+    }
+
     public void clearContainer(){
         player = null;
         enemySpawner = null;
@@ -92,6 +98,7 @@ public class ObjectsContainer {
         enemyList.clear();
         bulletList.clear();
         blockList.clear();
+        Fruit = null;
 
     }
 

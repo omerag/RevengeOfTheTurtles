@@ -3,6 +3,8 @@ package Model;
 import Controller.Game;
 import Controller.Mediator;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Factory {
 
     private Mediator mediator;
@@ -52,7 +54,15 @@ public class Factory {
         objectsContainer.addBullet(bullet);
     }
 
+    private int GetRandom(int min,int max)
+    {
+        return ThreadLocalRandom.current().nextInt(min, max + 1);
+    }
 
+    public void newFruit(int x, int y){
+        FruitOfLife Fruit = new FruitOfLife(GetRandom(1,gameWidth-1),GetRandom(1,gameHeight-1),ID.Fruit, mediator,gameWidth,gameHeight);
+        //objectsContainer.addFruit(Fruit);
+    }
 
 }
 
