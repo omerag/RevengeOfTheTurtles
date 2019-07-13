@@ -85,7 +85,7 @@ public class Factory {
 
     public void newFruit(int x, int y){
         FruitOfLife Fruit = new FruitOfLife(GetRandom(1,gameWidth-1),GetRandom(1,gameHeight-1),ID.Fruit, mediator,gameWidth,gameHeight);
-        //objectsContainer.addFruit(Fruit);
+        objectsContainer.addFruit(Fruit);
     }
 
 }

@@ -37,7 +37,7 @@ public class FruitOfLife extends GameObject {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(imagesList.get(GetRandom(1,5)),x,y,null);
+        //g.drawImage(imagesList.get(GetRandom(1,5)),x,y,null);
     }
 
 
