@@ -2,6 +2,8 @@ package Controller;
 
 import Model.*;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 
 public class Mediator {
 
@@ -37,7 +39,16 @@ public class Mediator {
         //activating tick method of player object
         objectsContainer.getPlayer().tick();
 
-      //  objectsContainer.getFruit().tick();
+        if(factory.getGame().GetTimer() % 60000 == 0 && objectsContainer.getFruit() == null)
+        {
+            factory.newFruit();
+        }
+
+        if(objectsContainer.getFruit() != null && objectsContainer.getFruit().GetCreationTime() > factory.getGame().GetTimer() + 20000)
+        {
+            objectsContainer.RemoveFruit();
+        }
+
 
     }
 
@@ -72,6 +83,8 @@ public class Mediator {
      void setLeft(boolean left) {
         this.left = left;
     }
+
+
 
      boolean isShootable(int xPlayer, int yPlayer,int xBullet,int yBullet){
         int tempX = (xPlayer + 32) - (xBullet + 16);

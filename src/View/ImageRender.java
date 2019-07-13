@@ -127,7 +127,7 @@ public class ImageRender{
                 }
                 if(blue == 255 && green == 0){
                     mediator.getFactory().createGameObject("PLAYER",xx*32,yy*32);
-                    mediator.getFactory().newFruit(xx*32*2,yy*32);                }
+                  }
                 if(blue == 255 && green == 255){
                     mediator.getFactory().createGameObject("ENEMY SPAWNER",xx*32,yy*32);
                 }

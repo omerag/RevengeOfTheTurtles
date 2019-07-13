@@ -83,10 +83,15 @@ public class Factory {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 
-    public void newFruit(int x, int y){
-        FruitOfLife Fruit = new FruitOfLife(GetRandom(1,gameWidth-1),GetRandom(10,gameHeight-10),ID.Fruit, mediator,gameWidth,gameHeight,GetRandom(0,3));
+    public Game getGame() {
+        return game;
+    }
+
+    public void newFruit(){
+        FruitOfLife Fruit = new FruitOfLife(GetRandom(10,gameWidth-10),GetRandom(10,gameHeight-10),ID.Fruit, mediator,gameWidth,gameHeight,GetRandom(0,4),System.currentTimeMillis());
         objectsContainer.addFruit(Fruit);
     }
+
 
 }
 

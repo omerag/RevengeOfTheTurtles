@@ -13,10 +13,11 @@ public class Game extends Canvas implements Runnable {
     private static final long serialVersionUID = 1L;
     private boolean isRunning = false;
     private Thread thread;
+    //private GameTimer Timer;
     private Mediator mediator;
     private HOFController hofc;
     private ImageRender imageRender;
-
+    private long timer;
     private int score = 0;
     private int playerHP = 100;
     private int snorlaxHP = 100;
@@ -34,6 +35,7 @@ public class Game extends Canvas implements Runnable {
     public Game(int gameWidth, int gameHeight){
 
         mediator = new Mediator();
+        //Timer = new GameTimer();
         imageRender = new ImageRender(this, mediator);
         hofc = new HOFController();
         setFocusable(true);
@@ -107,7 +109,7 @@ public class Game extends Canvas implements Runnable {
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
         double delta = 0;
-        long timer = System.currentTimeMillis();
+        timer = System.currentTimeMillis();
         int updates = 0;
         int frames = 0;
         while (isRunning) {
@@ -154,6 +156,12 @@ public class Game extends Canvas implements Runnable {
 
     public int getScore() {
         return score;
+    }
+
+    public long GetTimer()
+    {
+        return timer;
+
     }
 
     public int getPlayerHP() {

@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class EnemySpawner extends CharacterObject {
 
@@ -78,6 +79,9 @@ public class EnemySpawner extends CharacterObject {
         if(r.nextInt(280) < level && mediator.getObjectsContainer().getEnemyList().size() < 50){
             mediator.getFactory().createGameObject("ENEMY",x,y);
 
+
+
+
             //increase chance of creating new enemies
             if(r.nextInt(10 + level*5) == 0 && level < 10){
                     level++;
@@ -90,6 +94,11 @@ public class EnemySpawner extends CharacterObject {
     public void render(Graphics g) {
         g.drawImage(imagesList.get(currentState - 1),x,y,null);
 
+    }
+
+    private int GetRandom(int min,int max)
+    {
+        return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 
     @Override

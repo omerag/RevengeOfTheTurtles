@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.Game;
 import Controller.Mediator;
 
 import java.awt.*;
@@ -10,31 +11,20 @@ import java.util.concurrent.ThreadLocalRandom;
 public class FruitOfLife extends GameObject {
 
     private Mediator mediator;
-    private long time = System.currentTimeMillis();
-    private long timer;
+    private long CreationTime;
     protected List<BufferedImage> imagesList;
     private int FruitNumber;
 
-    public FruitOfLife(int x, int y, ID id, Mediator mediator, int gameWidth, int gameHeight,int fruitnumber) {
+    public FruitOfLife(int x, int y, ID id, Mediator mediator, int gameWidth, int gameHeight,int fruitnumber,long CreationTime) {
         super(x, y, id, gameWidth, gameHeight);
         this.mediator = mediator;
         this.imagesList = SpriteContainer.getInstance().getFruitsSprites();
         this.FruitNumber = fruitnumber;
+        this.CreationTime = CreationTime;
     }
 
     @Override
-    public void tick() {
-
-        long appear;
-        if(System.currentTimeMillis() > time + 6000) {
-            // x = GetRandom(1, gameWidth - 1);
-            //  y = GetRandom(1, gameHeight - 1);
-        }
-
-
-
-
-    }
+    public void tick() { }
 
     @Override
     public void render(Graphics g) {
@@ -47,6 +37,10 @@ public class FruitOfLife extends GameObject {
         return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 
+    public long GetCreationTime()
+    {
+        return this.CreationTime;
+    }
 
     @Override
     public Rectangle getBounds() {

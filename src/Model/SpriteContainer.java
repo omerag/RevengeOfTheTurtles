@@ -73,7 +73,7 @@ public class SpriteContainer {
     private void FruitsLoader(List<BufferedImage> fruitsprite ,BufferedImage bufferedImage)
     {
         SpriteSheet spriteSheet = new SpriteSheet(bufferedImage);
-        for(int i = 1; i < 5; i++){
+        for(int i = 1; i <= 5; i++){
             fruitsprite.add(spriteSheet.grabImage(i, 1, 32, 32,32));
         }
 

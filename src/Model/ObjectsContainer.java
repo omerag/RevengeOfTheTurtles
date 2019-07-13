@@ -16,6 +16,7 @@ public class ObjectsContainer {
     private List<Block> blockList = Collections.synchronizedList(new ArrayList<Block>());
     private FruitOfLife Fruit = null;
 
+
     private ObjectsContainer(){
         //nothing...
     }
@@ -89,6 +90,12 @@ public class ObjectsContainer {
 
     public FruitOfLife getFruit() {
         return Fruit;
+    }
+
+
+    public void RemoveFruit()
+    {
+        this.Fruit = null;
     }
 
     public void clearContainer(){
