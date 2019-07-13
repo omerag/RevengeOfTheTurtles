@@ -13,12 +13,13 @@ public class FruitOfLife extends GameObject {
     private long time = System.currentTimeMillis();
     private long timer;
     protected List<BufferedImage> imagesList;
+    private int FruitNumber;
 
-    public FruitOfLife(int x, int y, ID id, Mediator mediator, int gameWidth, int gameHeight) {
+    public FruitOfLife(int x, int y, ID id, Mediator mediator, int gameWidth, int gameHeight,int fruitnumber) {
         super(x, y, id, gameWidth, gameHeight);
         this.mediator = mediator;
         this.imagesList = SpriteContainer.getInstance().getFruitsSprites();
-
+        this.FruitNumber = fruitnumber;
     }
 
     @Override
@@ -37,7 +38,7 @@ public class FruitOfLife extends GameObject {
 
     @Override
     public void render(Graphics g) {
-        //g.drawImage(imagesList.get(GetRandom(1,5)),x,y,null);
+        g.drawImage(imagesList.get(FruitNumber),x,y,null);
     }
 
 
