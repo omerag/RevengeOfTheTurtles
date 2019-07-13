@@ -12,7 +12,7 @@ public class Factory {
     private ObjectsContainer objectsContainer;
     private int gameWidth;
     private int gameHeight;
-    private String[] stringObjectArray = new String[]{"ENEMY","ENEMY SPAWNER","PLAYER","BLOCK","ENEMY BULLET","PLAYER BULLET"};
+    private String[] stringObjectArray = new String[]{"ENEMY","ENEMY SPAWNER","PLAYER","BLOCK","ENEMY BULLET","PLAYER BULLET","FRUIT"};
 
     public Factory(Game game, int gameWidth, int gameHeight, Mediator mediator){
         this.mediator = mediator;
@@ -20,6 +20,13 @@ public class Factory {
         objectsContainer = ObjectsContainer.getInstance();
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
+    }
+
+    public void createGameObject(String objectName){
+
+        if(objectName.intern() == stringObjectArray[6].intern()){
+            newFruit();
+        }
     }
 
     public void createGameObject(String objectName, int x, int y){
@@ -36,6 +43,7 @@ public class Factory {
         else if (objectName.intern() == stringObjectArray[3].intern()){
             newBlock(x,y);
         }
+
 
     }
 
@@ -87,8 +95,8 @@ public class Factory {
         return game;
     }
 
-    public void newFruit(){
-        FruitOfLife Fruit = new FruitOfLife(GetRandom(10,gameWidth-10),GetRandom(10,gameHeight-10),ID.Fruit, mediator,gameWidth,gameHeight,GetRandom(0,4),System.currentTimeMillis());
+    private void newFruit(){
+        FruitOfLife Fruit = new FruitOfLife(GetRandom(64,gameWidth-64),GetRandom(64,gameHeight-128),ID.Fruit, mediator,gameWidth,gameHeight,GetRandom(0,4),System.currentTimeMillis());
         objectsContainer.addFruit(Fruit);
     }
 

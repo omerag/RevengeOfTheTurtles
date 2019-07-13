@@ -100,7 +100,7 @@ public class Mediator {
     private void friutCheck(){
         if(informator.isItTimeForFood(objectsContainer.getFruit()))
         {
-            factory.newFruit();
+            factory.createGameObject("FRUIT");
         }
 
         if(informator.isItTimeToEndFood(objectsContainer.getFruit()))

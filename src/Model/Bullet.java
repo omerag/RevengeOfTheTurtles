@@ -13,6 +13,8 @@ public class Bullet extends GameObject{
     private BufferedImage bullet_image2;
     private BufferedImage bullet_image3;
     private BufferedImage bullet_image4;
+    private int counter = 4;
+    private int counterReset = counter;
 
 
 
@@ -49,12 +51,16 @@ public class Bullet extends GameObject{
             return;
         }
 
+        counter--;
+        if(counter < 1){
+            BufferedImage tempImage = bullet_image;
+            bullet_image = bullet_image2;
+            bullet_image2 = bullet_image3;
+            bullet_image3 = bullet_image4;
+            bullet_image4 = tempImage;
+            counter = counterReset;
+        }
 
-        BufferedImage tempImage = bullet_image;
-        bullet_image = bullet_image2;
-        bullet_image2 = bullet_image3;
-        bullet_image3 = bullet_image4;
-        bullet_image4 = tempImage;
     }
 
     @Override
