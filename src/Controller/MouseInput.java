@@ -20,11 +20,11 @@ public class MouseInput extends MouseAdapter {
         int mx = e.getX();
         int my = e.getY();
 
-        Player player = mediator.objectsContainer.getPlayer();
-        Bullet bullet = mediator.objectsContainer.getReflectableBullet();
+        Player player = mediator.getObjectsContainer().getPlayer();
+        Bullet bullet = mediator.getObjectsContainer().getReflectableBullet();
 
 
-        if(mediator.objectsContainer.getReflectableBullet() != null &&
+        if(mediator.getObjectsContainer().getReflectableBullet() != null &&
                 mediator.isShootable(player.getX(),player.getY(), bullet.getX(), bullet.getY())
                 && bullet.bulletType == BulletType.ENEMY){
 
@@ -61,9 +61,9 @@ public class MouseInput extends MouseAdapter {
 
             }
 
-            mediator.factory.newFriendlyBullet(bullet.getX(),bullet.getY(),mx,my);
-            mediator.objectsContainer.removeBullet(bullet);
-            mediator.objectsContainer.setReflectableBullet(null);
+            mediator.getFactory().createGameObject("PLAYER BULLET",bullet.getX(),bullet.getY(),mx,my);
+            mediator.getObjectsContainer().removeBullet(bullet);
+            mediator.getObjectsContainer().setReflectableBullet(null);
 
         }
     }

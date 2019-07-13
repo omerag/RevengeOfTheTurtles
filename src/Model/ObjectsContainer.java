@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ObjectsContainer {
 
-    public static ObjectsContainer container= null;
+    public static ObjectsContainer container=  new ObjectsContainer();
 
     private Player player = null;
     private EnemySpawner enemySpawner = null;

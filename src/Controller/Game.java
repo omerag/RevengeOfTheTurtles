@@ -55,7 +55,7 @@ public class Game extends Canvas implements Runnable {
         ObjectsContainer.getInstance();
         SpriteContainer.getInstance();
 
-        Factory factory = new Factory(this,gameWidth,gameHeight,mediator,imageRender.getSs());
+        Factory factory = new Factory(this,gameWidth,gameHeight,mediator);
         mediator.setFactory(factory);
 
         MouseInput mouseInput = new MouseInput(mediator);
@@ -141,9 +141,7 @@ public class Game extends Canvas implements Runnable {
     public void tick(){
 
         mediator.tick();
-        imageRender.setPlayerHP(playerHP);
-        imageRender.setScore(score);
-        imageRender.setSnorlaxHP(snorlaxHP);
+
     }
 
     public void render(){
@@ -154,4 +152,27 @@ public class Game extends Canvas implements Runnable {
         return isRunning;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public int getPlayerHP() {
+        return playerHP;
+    }
+
+    public int getSnorlaxHP() {
+        return snorlaxHP;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setPlayerHP(int playerHP) {
+        this.playerHP = playerHP;
+    }
+
+    public void setSnorlaxHP(int snorlaxHP) {
+        this.snorlaxHP = snorlaxHP;
+    }
 }

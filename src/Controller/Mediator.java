@@ -7,8 +7,8 @@ public class Mediator {
 
     private boolean up = false, down = false, right = false,left = false;
 
-    public Factory factory;
-    public ObjectsContainer objectsContainer = ObjectsContainer.getInstance();
+    private Factory factory;
+    private ObjectsContainer objectsContainer = ObjectsContainer.getInstance();
 
     public void tick(){
 
@@ -85,5 +85,13 @@ public class Mediator {
 
     public void setFactory(Factory factory) {
         this.factory = factory;
+    }
+
+    public Factory getFactory() {
+        return factory;
+    }
+
+    public ObjectsContainer getObjectsContainer() {
+        return objectsContainer;
     }
 }

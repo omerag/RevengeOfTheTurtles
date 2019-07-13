@@ -12,9 +12,9 @@ public class Factory {
     private ObjectsContainer objectsContainer;
     private int gameWidth;
     private int gameHeight;
+    private String[] stringObjectArray = new String[]{"ENEMY","ENEMY SPAWNER","PLAYER","BLOCK","ENEMY BULLET","PLAYER BULLET"};
 
-    public Factory(Game game, int gameWidth, int gameHeight,
-                   Mediator mediator, SpriteSheet spriteSheet){
+    public Factory(Game game, int gameWidth, int gameHeight, Mediator mediator){
         this.mediator = mediator;
         this.game = game;
         objectsContainer = ObjectsContainer.getInstance();
@@ -22,34 +22,58 @@ public class Factory {
         this.gameHeight = gameHeight;
     }
 
+    public void createGameObject(String objectName, int x, int y){
 
+        if(objectName.intern() == stringObjectArray[0].intern()){
+            newEnemy(x, y);
+        }
+        else if(objectName.intern() == stringObjectArray[1].intern()){
+            newEnemySpawmer(x, y);
+        }
+        else if (objectName.intern() == stringObjectArray[2].intern()){
+            newPlayer(x,y);
+        }
+        else if (objectName.intern() == stringObjectArray[3].intern()){
+            newBlock(x,y);
+        }
 
-    public void newPlayer(int x, int y){
+    }
+
+    public void createGameObject(String objectName, int x, int y,int mx, int my){
+        if(objectName.intern() == stringObjectArray[4].intern()){
+            newEnemyBullet(x, y, mx, my);
+        }
+        else if(objectName.intern() == stringObjectArray[5].intern()){
+            newFriendlyBullet(x, y, mx, my);
+        }
+    }
+
+    private void newPlayer(int x, int y){
         Player player = new Player(x,y,ID.Player, mediator,game,gameWidth, gameHeight);
         objectsContainer.addPlayer(player);
     }
 
-    public void newBlock(int x, int y){
+    private void newBlock(int x, int y){
         Block block = new Block(x,y,ID.Block,gameWidth,gameHeight);
         objectsContainer.addBlock(block);
     }
 
-    public void newEnemySpawmer(int x, int y){
+    private void newEnemySpawmer(int x, int y){
         EnemySpawner enemySpawner = new EnemySpawner(x,y,ID.Enemy, mediator,game,gameWidth,gameHeight);
         objectsContainer.addEnemySpawner(enemySpawner);
     }
 
-    public void newEnemy(int x, int y){
+    private void newEnemy(int x, int y){
         Enemy enemy = new Enemy(x,y, ID.Enemy, mediator,game,gameWidth,gameHeight);
         objectsContainer.addEnemy(enemy);
     }
 
-    public void newEnemyBullet(int x, int y,int mx, int my){
+    private void newEnemyBullet(int x, int y,int mx, int my){
         Bullet bullet = new Bullet(x,y,ID.Bullet, mediator,mx, my,BulletType.ENEMY,gameWidth,gameHeight);
         objectsContainer.addBullet(bullet);
     }
 
-    public void newFriendlyBullet(int x, int y, int mx, int my){
+    private void newFriendlyBullet(int x, int y, int mx, int my){
         Bullet bullet = new Bullet(x,y,ID.Bullet, mediator,mx, my,BulletType.PLAYER,gameWidth,gameHeight);
         objectsContainer.addBullet(bullet);
     }

@@ -45,7 +45,7 @@ public class Bullet extends GameObject{
 
 
         if(x <= 32 || x >= gameWidth - 64 || y < 32 || y >= gameHeight - 96){
-            mediator.objectsContainer.removeBullet(this);
+            mediator.getObjectsContainer().removeBullet(this);
             return;
         }
 

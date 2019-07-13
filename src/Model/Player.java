@@ -63,13 +63,13 @@ public class Player extends CharacterObject {
 
     private void collision(){
         //check is player got hit by an enemy's bullet
-        List<Bullet> bulletList = mediator.objectsContainer.getBulletList();
+        List<Bullet> bulletList = mediator.getObjectsContainer().getBulletList();
         for(int i = 0;i < bulletList.size(); i++ ){
             Bullet bullet = bulletList.get(i);
             if(bullet.bulletType == BulletType.ENEMY && getBounds().intersects(bullet.getBounds())){
                 SoundContainer.INJURED.play();
                 bulletList.remove(i);
-                game.playerHP -= 25;
+                game.setPlayerHP(game.getPlayerHP() - 25);
                 break;
             }
         }

@@ -33,18 +33,18 @@ public class Enemy extends CharacterObject {
         checkBorders();
 
         //getting play's position to aim at him
-        xPlayer = mediator.objectsContainer.getPlayer().getX() + 32;
-        yPlayer = mediator.objectsContainer.getPlayer().getY() + 32;
+        xPlayer = mediator.getObjectsContainer().getPlayer().getX() + 32;
+        yPlayer = mediator.getObjectsContainer().getPlayer().getY() + 32;
 
 
         //checking if this enemy got hit by one of the player bullets
-        for (int i = 0; i < mediator.objectsContainer.getBulletList().size(); i++) {
-            Bullet bullet = mediator.objectsContainer.getBulletList().get(i);
+        for (int i = 0; i < mediator.getObjectsContainer().getBulletList().size(); i++) {
+            Bullet bullet = mediator.getObjectsContainer().getBulletList().get(i);
             if (getBounds().intersects(bullet.getBounds()) &&
                     bullet.getBulletType() == BulletType.PLAYER) {
                 SoundContainer.SQUISH.play();
-                mediator.objectsContainer.removeBullet(bullet);
-                mediator.objectsContainer.removeEnemy(this);
+                mediator.getObjectsContainer().removeBullet(bullet);
+                mediator.getObjectsContainer().removeEnemy(this);
                 game.score++;
                 return;
             }
@@ -82,7 +82,7 @@ public class Enemy extends CharacterObject {
 
         //shoot bullets
         if(r.nextInt(200) == 0){
-            mediator.factory.newEnemyBullet(x,y,xPlayer,yPlayer);
+            mediator.getFactory().createGameObject("ENEMY BULLET",x,y,xPlayer,yPlayer);
         }
 
     }

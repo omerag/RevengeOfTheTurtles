@@ -69,7 +69,6 @@ public class ImageRender{
 
         objectsContainer.getEnemySpawner().render(g);
         objectsContainer.getPlayer().render(g);
-        //objectsContainer.getFruit().render(g);
 
 
         //player's health bar
@@ -126,7 +125,6 @@ public class ImageRender{
                 }
                 if(blue == 255 && green == 0){
                     mediator.factory.newPlayer(xx*32,yy*32);
-                    //mediator.factory.newFruit(xx*32,yy*32);
                 }
                 if(blue == 255 && green == 255){
                     mediator.factory.newEnemySpawmer(xx*32,yy*32);

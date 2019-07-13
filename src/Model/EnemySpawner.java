@@ -34,11 +34,11 @@ public class EnemySpawner extends CharacterObject {
         checkBorders();
 
         //check if got hit by a player's bullet
-        List<Bullet> bulletList = mediator.objectsContainer.getBulletList();
+        List<Bullet> bulletList = mediator.getObjectsContainer().getBulletList();
         for(int i = 0; i <bulletList.size();i++ ){
             Bullet bullet = bulletList.get(i);
             if(bullet.bulletType == BulletType.PLAYER && bullet.getBounds().intersects(getBounds())){
-                game.snorlaxHP--;
+               game.setSnorlaxHP(game.getSnorlaxHP() - 1);
                 bulletList.remove(i);
                 break;
             }
@@ -75,8 +75,8 @@ public class EnemySpawner extends CharacterObject {
 
 
         //create new enemies
-        if(r.nextInt(280) < level && mediator.objectsContainer.getEnemyList().size() < 50){
-            mediator.factory.newEnemy(x,y);
+        if(r.nextInt(280) < level && mediator.getObjectsContainer().getEnemyList().size() < 50){
+            mediator.getFactory().createGameObject("ENEMY",x,y);
 
             //increase chance of creating new enemies
             if(r.nextInt(10 + level*5) == 0 && level < 10){
