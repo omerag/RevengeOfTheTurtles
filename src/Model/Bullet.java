@@ -21,7 +21,7 @@ public class Bullet extends GameObject{
         super(x, y, id,gameWidth,gameHeight);
         this.mediator = mediator;
 
-        calculateVeloity(x,y,mx,my);
+        calculateVelocity(x,y,mx,my);
 
         this.bulletType = bulletType;
         bullet_image = SpriteContainer.getInstance().getGeneral_sheet().grabImage(1,3,32,32,32);
@@ -73,7 +73,7 @@ public class Bullet extends GameObject{
         return bulletType;
     }
 
-    private void calculateVeloity(float x, float y, float mx, float my){
+    private void calculateVelocity(float x, float y, float mx, float my){
 
         float tempX = mx - x;
         float tempY = my - y;
