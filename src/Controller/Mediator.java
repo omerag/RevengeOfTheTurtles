@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 
@@ -11,6 +12,7 @@ public class Mediator {
 
     private Factory factory;
     private ObjectsContainer objectsContainer = ObjectsContainer.getInstance();
+    private Informator informator = new Informator();
 
     public void tick(){
 
@@ -19,7 +21,7 @@ public class Mediator {
             Bullet bullet = objectsContainer.getBulletList().get(i);
 
             //check if an enemy's bullet can be reflectable
-            if(isShootable(objectsContainer.getPlayer().getX(), objectsContainer.getPlayer().getY(),
+            if(informator.isShootable(objectsContainer.getPlayer().getX(), objectsContainer.getPlayer().getY(),
                     bullet.getX(),bullet.getY()) && bullet.bulletType == BulletType.ENEMY){
                 objectsContainer.setReflectableBullet(bullet);
             }
@@ -39,15 +41,7 @@ public class Mediator {
         //activating tick method of player object
         objectsContainer.getPlayer().tick();
 
-        if(factory.getGame().GetTimer() % 60000 == 0 && objectsContainer.getFruit() == null)
-        {
-            factory.newFruit();
-        }
-
-        if(objectsContainer.getFruit() != null && objectsContainer.getFruit().GetCreationTime() > factory.getGame().GetTimer() + 20000)
-        {
-            objectsContainer.RemoveFruit();
-        }
+        friutCheck();
 
 
     }
@@ -86,15 +80,6 @@ public class Mediator {
 
 
 
-     boolean isShootable(int xPlayer, int yPlayer,int xBullet,int yBullet){
-        int tempX = (xPlayer + 32) - (xBullet + 16);
-        int tempY = (yPlayer + 32) - (yBullet + 16);
-
-        if(tempX < 0) tempX = -tempX;
-        if(tempY < 0) tempY = -tempY;
-
-        return tempX < 128 && tempY < 128;
-    }
 
     public void setFactory(Factory factory) {
         this.factory = factory;
@@ -106,5 +91,21 @@ public class Mediator {
 
     public ObjectsContainer getObjectsContainer() {
         return objectsContainer;
+    }
+
+    public Informator getInformator() {
+        return informator;
+    }
+
+    private void friutCheck(){
+        if(informator.isItTimeForFood(objectsContainer.getFruit()))
+        {
+            factory.newFruit();
+        }
+
+        if(informator.isItTimeToEndFood(objectsContainer.getFruit()))
+        {
+            objectsContainer.RemoveFruit();
+        }
     }
 }

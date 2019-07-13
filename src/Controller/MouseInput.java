@@ -25,7 +25,7 @@ public class MouseInput extends MouseAdapter {
 
 
         if(mediator.getObjectsContainer().getReflectableBullet() != null &&
-                mediator.isShootable(player.getX(),player.getY(), bullet.getX(), bullet.getY())
+                mediator.getInformator().isShootable(player.getX(),player.getY(), bullet.getX(), bullet.getY())
                 && bullet.bulletType == BulletType.ENEMY){
 
             int i = r.nextInt(9);
