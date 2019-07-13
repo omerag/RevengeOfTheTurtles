@@ -87,9 +87,6 @@ public class Bullet extends GameObject{
         velX = tempX;
         velY = tempY;
 
-        System.out.println("velX = " + velX);
-        System.out.println("velY = " + velY);
-
     }
 
 
