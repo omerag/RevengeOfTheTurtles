@@ -12,9 +12,7 @@ public class ImageRender{
 
     private Mediator mediator;
     private Game game;
-    private int playerHP;
-    private int score;
-    private int snorlaxHP = 100;
+
 
 
     private SpriteSheet ss;
@@ -52,7 +50,7 @@ public class ImageRender{
             }
         }
 
-        ObjectsContainer objectsContainer = mediator.objectsContainer;
+        ObjectsContainer objectsContainer = mediator.getObjectsContainer();
 
         for(Block block : objectsContainer.getBlockList()){
             block.render(g);
@@ -75,21 +73,21 @@ public class ImageRender{
         g.setColor(Color.CYAN);
         g.fillRect(5, 5, 200, 32);
         g.setColor(Color.RED);
-        g.fillRect(5, 5, playerHP * 2, 32);
+        g.fillRect(5, 5, game.getPlayerHP() * 2, 32);
         g.setColor(Color.BLACK);
         g.drawRect(5, 5, 200, 32);
 
         //player's score
         g.setColor(Color.WHITE);
         g.setFont(new Font("Courier", Font.BOLD,28));
-        g.drawString("Score: " + score, 5, 65);
+        g.drawString("Score: " + game.getScore(), 5, 65);
 
 
         //snorlax's health bar
         g.setColor(Color.CYAN);
         g.fillRect(820, 5, 200, 32);
         g.setColor(Color.RED);
-        g.fillRect(820, 5, snorlaxHP * 2, 32);
+        g.fillRect(820, 5, game.getSnorlaxHP() * 2, 32);
         g.setColor(Color.BLACK);
         g.drawRect(820, 5, 200, 32);
 
@@ -118,16 +116,16 @@ public class ImageRender{
                 int blue = (pixel) & 0xff;
 
                 if(red == 255){
-                    mediator.factory.newBlock(xx*32,yy*32);
+                    mediator.getFactory().createGameObject("BLOCK",xx*32,yy*32);
                 }
                 if(green == 255 && blue == 0){
-                    mediator.factory.newEnemy(xx*32,yy*32);
+                    mediator.getFactory().createGameObject("ENEMY",xx*32,yy*32);
                 }
                 if(blue == 255 && green == 0){
-                    mediator.factory.newPlayer(xx*32,yy*32);
+                    mediator.getFactory().createGameObject("PLAYER",xx*32,yy*32);
                 }
                 if(blue == 255 && green == 255){
-                    mediator.factory.newEnemySpawmer(xx*32,yy*32);
+                    mediator.getFactory().createGameObject("ENEMY SPAWNER",xx*32,yy*32);
                 }
             }
         }
@@ -137,15 +135,4 @@ public class ImageRender{
         return ss;
     }
 
-    public void setPlayerHP(int playerHP) {
-        this.playerHP = playerHP;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public void setSnorlaxHP(int snorlaxHP) {
-        this.snorlaxHP = snorlaxHP;
-    }
 }

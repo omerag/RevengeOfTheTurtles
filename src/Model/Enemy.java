@@ -45,7 +45,7 @@ public class Enemy extends CharacterObject {
                 SoundContainer.SQUISH.play();
                 mediator.getObjectsContainer().removeBullet(bullet);
                 mediator.getObjectsContainer().removeEnemy(this);
-                game.score++;
+                game.setScore(game.getScore() + 100);
                 return;
             }
         }

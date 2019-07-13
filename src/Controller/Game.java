@@ -17,9 +17,9 @@ public class Game extends Canvas implements Runnable {
     private HOFController hofc;
     private ImageRender imageRender;
 
-    public int score = 0;
-    public int playerHP = 100;
-    public int snorlaxHP = 100;
+    private int score = 0;
+    private int playerHP = 100;
+    private int snorlaxHP = 100;
 
 
     private boolean isFocused = true;
