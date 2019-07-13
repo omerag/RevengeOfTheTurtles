@@ -74,7 +74,9 @@ public class Player extends CharacterObject {
                 break;
             }
         }
-        if(getBounds().intersects(fruit.getBounds())){
+
+
+        if(fruit != null && getBounds().intersects(fruit.getBounds())){
             SoundContainer.INJURED.play();
             mediator.getObjectsContainer().RemoveFruit();
             SoundContainer.EAT.play();

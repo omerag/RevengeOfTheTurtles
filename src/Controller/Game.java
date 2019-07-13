@@ -178,9 +178,22 @@ public class Game extends Canvas implements Runnable {
 
     public void setPlayerHP(int playerHP) {
         this.playerHP = playerHP;
+        if(this.playerHP > 100){
+            this.playerHP = 100;
+        }
+        else if(this.playerHP  < 1){
+            this.playerHP = 0;
+        }
     }
 
     public void setSnorlaxHP(int snorlaxHP) {
         this.snorlaxHP = snorlaxHP;
+
+        if(this.snorlaxHP > 100){
+            this.snorlaxHP = 100;
+        }
+        else if(this.snorlaxHP  < 1){
+            this.snorlaxHP = 0;
+        }
     }
 }

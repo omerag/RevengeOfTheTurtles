@@ -25,7 +25,7 @@ public class Informator {
     public boolean isItTimeToEndFood(FruitOfLife fruit){
         Random random = new Random();
 
-        return fruit != null && random.nextInt(300) == 0;
+        return fruit != null && random.nextInt(500) == 0;
     }
 
 }
