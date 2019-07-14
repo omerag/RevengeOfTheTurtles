@@ -7,6 +7,7 @@ import javax.sound.sampled.*;
 public enum SoundContainer {
     THEME("/res/theme_song.wav"),
     INJURED("/res/injured_sound.wav"),
+    SNORLAX_INJURED("/res/snorlax_injured_sound.wav"),
     EAT("/res/eat_sound.wav"),
     SQUISH("/res/squish_sound.wav"),
     PANDA1("/res/panda_sound_1.wav"),

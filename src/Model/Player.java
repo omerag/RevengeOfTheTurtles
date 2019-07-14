@@ -77,7 +77,6 @@ public class Player extends CharacterObject {
 
 
         if(fruit != null && getBounds().intersects(fruit.getBounds())){
-            SoundContainer.INJURED.play();
             mediator.getObjectsContainer().RemoveFruit();
             SoundContainer.EAT.play();
             game.setPlayerHP(game.getPlayerHP() + 15);
