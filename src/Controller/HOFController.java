@@ -41,7 +41,7 @@ public class HOFController {
 
     public String GetPlayerNameController(int won)
     {
-        NameWindow nw = new NameWindow(400,200,"Enter Name",won);
+        NameWindow nw = new NameWindow(600,200,"Enter Name",won);
 
         while(nw.getPlayerName() == null)
         {

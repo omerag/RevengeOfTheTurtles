@@ -30,6 +30,7 @@ public class Window extends JFrame implements ActionListener {
     private int width;
     private int height;
     private JPanel backpic;
+    private JPanel insructions;
     private JPanel HOFPanel;
     private Game _game = null;
     private HOFController hofc = new HOFController();
@@ -157,10 +158,6 @@ public class Window extends JFrame implements ActionListener {
         if (action.equals(ACTION_NEW_GAME)) {
             System.out.println("New Game");
 
-            if(HOFPanel != null)
-            {
-                remove(HOFPanel);
-            }
             if(backpic != null)
             {
                 remove(backpic);
@@ -177,9 +174,17 @@ public class Window extends JFrame implements ActionListener {
 
                 remove(_game);
 
-                System.out.println("starting another game");
-
             }
+            if(insructions != null)
+            {
+                remove(insructions);
+            }
+
+            if(HOFPanel != null)
+            {
+                remove(HOFPanel);
+            }
+
 
             newGame();
             _game.StartGame();
@@ -191,6 +196,53 @@ public class Window extends JFrame implements ActionListener {
             System.exit(0);
         } else if (action.equals(ACTION_ABOUT)) {
             System.out.println("Show about dialog");
+
+
+            if(backpic != null)
+            {
+                remove(backpic);
+            }
+
+            if(_game != null){
+                System.out.println("stop old game");
+
+                if(_game.isRunning()){
+                    _game.stop();
+                }
+
+                System.out.println("remove game component");
+
+                remove(_game);
+
+            }
+            if(insructions != null)
+            {
+                remove(insructions);
+            }
+
+            if(HOFPanel != null)
+            {
+                remove(HOFPanel);
+            }
+
+
+
+
+            insructions = new JPanel();
+
+            BufferImageLoader loader = new BufferImageLoader();
+            //level = loader.loadImage("/wizard_level - Copy.png");
+            BufferedImage intpicture = loader.loadImage("/gameinstructions.png");
+
+            //image = ImageIO.read(new File("/revengeofthepicture.png"));
+
+            JLabel label = new JLabel(new ImageIcon(intpicture));
+
+            insructions.add(label);
+            add(insructions,BorderLayout.CENTER);
+
+
+
         }
         else if (action.equals(HALL_OF_FAME)) {
             System.out.println("Show Hall of Fame");
@@ -210,6 +262,10 @@ public class Window extends JFrame implements ActionListener {
 
                 remove(_game);
 
+            }
+            if(insructions != null)
+            {
+                remove(insructions);
             }
 
             if(HOFPanel != null)
