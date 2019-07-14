@@ -29,8 +29,8 @@ public class Window extends JFrame implements ActionListener {
 
     private int width;
     private int height;
-    private JPanel backpic;
-    private JPanel insructions;
+    private JPanel backpic = null;
+    private JPanel insructions = null;
     private JPanel HOFPanel;
     private Game _game = null;
     private HOFController hofc = new HOFController();
@@ -230,17 +230,19 @@ public class Window extends JFrame implements ActionListener {
 
             insructions = new JPanel();
 
-            BufferImageLoader loader = new BufferImageLoader();
+            BufferImageLoader loader2 = new BufferImageLoader();
             //level = loader.loadImage("/wizard_level - Copy.png");
-            BufferedImage intpicture = loader.loadImage("/gameinstructions.png");
+            BufferedImage intpicture = loader2.loadImage("/gameinstructions.png");
 
             //image = ImageIO.read(new File("/revengeofthepicture.png"));
 
-            JLabel label = new JLabel(new ImageIcon(intpicture));
+            JLabel label2 = new JLabel(new ImageIcon(intpicture));
 
-            insructions.add(label);
+            insructions.add(label2);
             add(insructions,BorderLayout.CENTER);
-
+            pack();
+            setVisible(true);
+            pack();
 
 
         }
