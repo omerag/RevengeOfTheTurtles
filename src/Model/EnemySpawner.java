@@ -39,7 +39,8 @@ public class EnemySpawner extends CharacterObject {
         for(int i = 0; i <bulletList.size();i++ ){
             Bullet bullet = bulletList.get(i);
             if(bullet.bulletType == BulletType.PLAYER && bullet.getBounds().intersects(getBounds())){
-               game.setSnorlaxHP(game.getSnorlaxHP() - 1);
+                SoundContainer.SNORLAX_INJURED.play();
+                game.setSnorlaxHP(game.getSnorlaxHP() - 1);
                 bulletList.remove(i);
                 break;
             }
