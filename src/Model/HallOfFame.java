@@ -74,7 +74,7 @@ public class HallOfFame
             fr.close();
             lines = stringBuffer.toString().split("\n");
 
-            for(int i=1;i<lines.length;i++)
+            for(int i=0;i<lines.length;i++)
             {
                 details = lines[i].split(",");
                 if(details[2].equals("0") ) {
@@ -111,7 +111,7 @@ public class HallOfFame
         String[] recordarray;
 
 
-        for(int i=1;i<lines.length;i++)
+        for(int i=0;i<lines.length;i++)
         {
             recordarray = lines[i].split(",");
             records.add(new Record(recordarray[1],recordarray[2],recordarray[3]));
@@ -128,18 +128,6 @@ public class HallOfFame
         try {
             FileWriter oFile = new FileWriter(FILE_NAME,false);
             int i=0;
-
-
-            oFile.append("Rank");
-            oFile.append(',');
-            oFile.append("name");
-            oFile.append(',');
-            oFile.append("Score");
-            oFile.append(',');
-            oFile.append("Date");
-            oFile.append(',');
-            oFile.append('\n');
-
 
             for(Record rec : records)
             {
@@ -180,16 +168,6 @@ public class HallOfFame
             try {
                 scoresfile.createNewFile();
                 FileWriter oFile = new FileWriter(FILE_NAME);
-
-                oFile.append("Rank");
-                oFile.append(',');
-                oFile.append("name");
-                oFile.append(',');
-                oFile.append("Score");
-                oFile.append(',');
-                oFile.append("Date");
-                oFile.append(',');
-                oFile.append('\n');
 
 
                 for(int i=0;i<10;i++)

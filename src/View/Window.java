@@ -10,10 +10,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import Controller.Game;
 import Controller.HOFController;
 import Model.BufferImageLoader;
+import Model.RatingComparator;
 import Model.HallOfFame;
 import Model.Record;
 import com.sun.istack.internal.localization.NullLocalizable;
@@ -217,18 +220,15 @@ public class Window extends JFrame implements ActionListener {
             HOFPanel = new JPanel();
             JTextArea scores = new JTextArea();
             scoreslist = hofc.getScores();
+            Comparator<Record> cmp = Collections.reverseOrder(new RatingComparator());
 
+            //Collections.sort(scoreslist, cmp);
             StringBuilder sb = new StringBuilder();
+            sb.append("Rank" +"\t Name \t  Score  \t\t  Date  \n\n");
             for (Record i : scoreslist) {
-                if(loc==0)
-                {
-                    sb.append("Rank" +"\t"+ i.getName() + "\t" + i.getScore() + "\t\t" + i.getDate() + "\n\n");
 
-                }
-                else
-                {
-                    sb.append(loc + "\t" + i.getName() + "\t" + i.getScore() + "\t" + i.getDate() + "\n\n");
-                }
+                    sb.append(loc+1 + "\t" + i.getName() + "\t" + i.getScore() + "\t" + i.getDate() + "\n\n");
+
 
                 if(loc==10)
                 {

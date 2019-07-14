@@ -11,9 +11,11 @@ public class NameWindow extends JFrame implements ActionListener {
 
     private String PlayerName;
     private JTextField tfd1;
+    private int win;
 
-    public NameWindow(int width, int height, String title)
+    public NameWindow(int width, int height, String title,int won)
     {
+        this.win = won;
         initUI(width,height,title);
     }
 
@@ -31,6 +33,7 @@ public class NameWindow extends JFrame implements ActionListener {
         setLayout(new BorderLayout());
         setLocationRelativeTo(getRootPane());
         JPanel namepanel = new JPanel();
+        //JLabel winorlose =
          tfd1 = new JTextField("",20);
         JButton jbt = new JButton("Enter");
         jbt.setActionCommand(GET_NAME);

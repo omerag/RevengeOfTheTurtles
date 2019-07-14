@@ -33,15 +33,15 @@ public class HOFController {
     }
 
 
-    public void checkifhighscore(String score)
+    public void checkifhighscore(String score,int won)
     {
-        String name = GetPlayerNameController();
+        String name = GetPlayerNameController(won);
         hof.CheckLocation(score,name);
     }
 
-    public String GetPlayerNameController()
+    public String GetPlayerNameController(int won)
     {
-        NameWindow nw = new NameWindow(400,200,"Enter Name");
+        NameWindow nw = new NameWindow(400,200,"Enter Name",won);
 
         while(nw.getPlayerName() == null)
         {

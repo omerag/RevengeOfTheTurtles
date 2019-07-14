@@ -89,7 +89,16 @@ public class Game extends Canvas implements Runnable {
 
 
             if(playerHP < 1 || snorlaxHP < 1) {
-                hofc.checkifhighscore(Integer.toString(score));
+
+                if(playerHP < 1)
+                {
+                    hofc.checkifhighscore(Integer.toString(score),0);
+                }
+                else
+                {
+                    hofc.checkifhighscore(Integer.toString(score),1);
+                }
+
             }
 
             thread.join();
