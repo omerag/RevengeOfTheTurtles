@@ -65,7 +65,7 @@ public class Window extends JFrame implements ActionListener {
         backpic = new JPanel();
 
             BufferImageLoader loader = new BufferImageLoader();
-            //level = loader.loadImage("/wizard_level - Copy.png");
+            //level = loader.loadImage("/game_map.png");
             BufferedImage backpicture = loader.loadImage("/revengeofthepicture.png");
 
             //image = ImageIO.read(new File("/revengeofthepicture.png"));
@@ -231,7 +231,7 @@ public class Window extends JFrame implements ActionListener {
             insructions = new JPanel();
 
             BufferImageLoader loader2 = new BufferImageLoader();
-            //level = loader.loadImage("/wizard_level - Copy.png");
+            //level = loader.loadImage("/game_map.png");
             BufferedImage intpicture = loader2.loadImage("/gameinstructions.png");
 
             //image = ImageIO.read(new File("/revengeofthepicture.png"));

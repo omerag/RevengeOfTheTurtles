@@ -25,7 +25,7 @@ public class ImageRender{
         this.mediator = mediator;
 
         BufferImageLoader loader = new BufferImageLoader();
-        level = loader.loadImage("/wizard_level - Copy.png");
+        level = loader.loadImage("/game_map.png");
         BufferedImage sprite_sheet = loader.loadImage("/sprite_sheet.png");
 
         ss = new SpriteSheet(sprite_sheet);
