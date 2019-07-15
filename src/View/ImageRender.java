@@ -135,8 +135,4 @@ public class ImageRender{
         }
     }
 
-    public SpriteSheet getSs() {
-        return ss;
-    }
-
 }
