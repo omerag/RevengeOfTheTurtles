@@ -103,7 +103,7 @@ public class Window extends JFrame implements ActionListener {
         HallOfFame.setActionCommand(HALL_OF_FAME);
 
         // File -> New game menu item
-        JMenuItem newGame = new JMenuItem("new game");
+        JMenuItem newGame = new JMenuItem("New game");
         newGame.setToolTipText("Start level 1");
         newGame.setActionCommand(ACTION_NEW_GAME);
 
@@ -113,7 +113,7 @@ public class Window extends JFrame implements ActionListener {
         exitGame.setActionCommand(ACTION_EXIT_GAME);
 
         // Help -> About menu item
-        JMenuItem about = new JMenuItem("About");
+        JMenuItem about = new JMenuItem("How to play");
         about.setToolTipText("About the developers");
         about.setActionCommand(ACTION_ABOUT);
 
